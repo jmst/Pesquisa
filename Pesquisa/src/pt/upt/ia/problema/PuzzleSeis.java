@@ -9,10 +9,10 @@ public class PuzzleSeis extends EstadoProblema {
 //	private int tab[][] = {{1,0,0,0,0,6},{2,3,0,0,4,5}};
 	
 // prof 9
-//	private int tab[][] = {{1,4,0,0,0,6},{2,3,0,0,0,5}};
+	private int tab[][] = {{1,4,0,0,0,6},{2,3,0,0,0,5}};
 	
 // prof 13	
-	private int tab[][] = {{1,4,0,5,3,6},{0,0,0,2,0,0}};
+//	private int tab[][] = {{1,4,0,5,3,6},{0,0,0,2,0,0}};
 
 	private int hash = Integer.MAX_VALUE;
 

@@ -1,20 +1,23 @@
 package pt.upt.ia.pesquisa;
 
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.MissCan;
+import pt.upt.ia.problema.PuzzleSeis;
 
-public class PesquisaLargura {
+public class PesquisaAprofIterativo {
 	private Fronteira f;
 	private HashMap<Integer, EstadoProblema> fechados;
 	private int contaNos;
+	private int maxima;
 
-	public PesquisaLargura(ArrayList<EstadoProblema> i) {
+	public PesquisaAprofIterativo(int prof, ArrayList<EstadoProblema> i) {
+		maxima = prof;
 		fechados = new HashMap<Integer, EstadoProblema>();
-		f = new Fronteira(new Largura());
+		f = new Fronteira(new Profundidade());
 		for (EstadoProblema e : i) {
 			f.junta(new No(e, null, 0));
 		}
@@ -39,9 +42,9 @@ public class PesquisaLargura {
 				if (nosuc.getEstado().goal()) {
 					return nosuc;
 				}
-				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
-					continue;
-				}
+//				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
+//					continue;
+//				}
 				if (no.ciclo(nosuc)) {
 					continue;
 				}
@@ -53,21 +56,27 @@ public class PesquisaLargura {
 			if (contaNos % 10000 == 0) {
 				System.out.println(no);
 				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
-						+ String.format("%1$,10d", f.getContagem()));
+						+ String.format("%1$,10d", f.getContagem())+"      limite: "+maxima);
 			}
 		}
 		return null;
 	}
 
 	public static void main(String[] args) {
-//		PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
-//		PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
-
+		PesquisaAprofIterativo p = null;
 		Calendar c = Calendar.getInstance();
+		No no = null;
+		int limite = 5;
 		long t = c.getTimeInMillis();
 		System.out.println("#########################################################");
-		No no = p.resolve();
+		while (no == null) {
+			limite++;
+//			p = new PesquisaAprofIterativo( limite, PuzzleOito.getIniciais());
+			p = new PesquisaAprofIterativo( limite, PuzzleSeis.getIniciais());
+	//		p = new PesquisaAprofIterativo( limite, MissCan.getIniciais());
+	
+			no = p.resolve();
+		}
 		System.out.println("===========================");
 		if (no != null) {
 			no.escrevePais();
@@ -75,16 +84,17 @@ public class PesquisaLargura {
 			System.out.println("Sem solução");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,10d", p.getContaNos()) + "    fronteira: "
-				+ String.format("%1$,10d", p.getFronteira().getContagem()));
+				+ String.format("%1$,10d", p.getFronteira().getContagem())+"      limite: "+limite);
 		System.out.println("~~~~~~~~ FIM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		c = Calendar.getInstance();
 		System.out.println("Demorou: " + (c.getTimeInMillis() - t) + " ms");
 	}
 
-	private class Largura implements IAlgoritmo {
+	private class Profundidade implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-			lista.add(no);
+	        if (no.getProfundidade() < maxima)
+	            lista.add( 0, no);
 		}
 	}
 

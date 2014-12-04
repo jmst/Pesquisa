@@ -40,9 +40,9 @@ public class PesquisaAStar {
 				if (nosuc.getEstado().goal()) {
 					return nosuc;
 				}
-				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
-					continue;
-				}
+//				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
+//					continue;
+//				}
 				if (no.ciclo(nosuc)) {
 					continue;
 				}
@@ -53,8 +53,8 @@ public class PesquisaAStar {
 			contaNos++;
 			if (contaNos % 10000 == 0) {
 				System.out.println(no);
-				System.out.println("        nos expandidos: " + String.format("%1$,12d", contaNos) + "    fronteira: "
-						+ String.format("%1$,12d", f.getContagem()));
+				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
+						+ String.format("%1$,10d", f.getContagem()));
 			}
 		}
 		return null;
@@ -63,6 +63,7 @@ public class PesquisaAStar {
 	public static void main(String[] args) {
 		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
 //		PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
+//		PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
@@ -74,8 +75,8 @@ public class PesquisaAStar {
 		} else {
 			System.out.println("Sem solução");
 		}
-		System.out.println("        nos expandidos: " + String.format("%1$,12d", p.getContaNos()) + "    fronteira: "
-				+ String.format("%1$,12d", p.getFronteira().getContagem()));
+		System.out.println("        nos expandidos: " + String.format("%1$,10d", p.getContaNos()) + "    fronteira: "
+				+ String.format("%1$,10d", p.getFronteira().getContagem()));
 		System.out.println("~~~~~~~~ FIM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		c = Calendar.getInstance();

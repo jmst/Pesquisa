@@ -1,20 +1,23 @@
 package pt.upt.ia.pesquisa;
 
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.MissCan;
+import pt.upt.ia.problema.PuzzleSeis;
 
-public class PesquisaLargura {
+public class PesquisaProfLimitada {
 	private Fronteira f;
 	private HashMap<Integer, EstadoProblema> fechados;
 	private int contaNos;
+	private int maxima;
 
-	public PesquisaLargura(ArrayList<EstadoProblema> i) {
+	public PesquisaProfLimitada(int prof, ArrayList<EstadoProblema> i) {
+		maxima = prof;
 		fechados = new HashMap<Integer, EstadoProblema>();
-		f = new Fronteira(new Largura());
+		f = new Fronteira(new Profundidade());
 		for (EstadoProblema e : i) {
 			f.junta(new No(e, null, 0));
 		}
@@ -39,9 +42,9 @@ public class PesquisaLargura {
 				if (nosuc.getEstado().goal()) {
 					return nosuc;
 				}
-				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
-					continue;
-				}
+//				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
+//					continue;
+//				}
 				if (no.ciclo(nosuc)) {
 					continue;
 				}
@@ -60,9 +63,9 @@ public class PesquisaLargura {
 	}
 
 	public static void main(String[] args) {
-//		PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
-//		PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
+//		PesquisaProfLimitada p = new PesquisaProfLimitada( 25, PuzzleOito.getIniciais());
+		PesquisaProfLimitada p = new PesquisaProfLimitada( 15, PuzzleSeis.getIniciais());
+//		PesquisaProfLimitada p = new PesquisaProfLimitada( 15, MissCan.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
@@ -82,9 +85,10 @@ public class PesquisaLargura {
 		System.out.println("Demorou: " + (c.getTimeInMillis() - t) + " ms");
 	}
 
-	private class Largura implements IAlgoritmo {
+	private class Profundidade implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-			lista.add(no);
+	        if (no.getProfundidade() <= maxima)
+	            lista.add( 0, no);
 		}
 	}
 

@@ -1,20 +1,21 @@
 package pt.upt.ia.pesquisa;
 
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.MissCan;
+import pt.upt.ia.problema.PuzzleSeis;
 
-public class PesquisaLargura {
+public class PesquisaProfundidade {
 	private Fronteira f;
 	private HashMap<Integer, EstadoProblema> fechados;
 	private int contaNos;
 
-	public PesquisaLargura(ArrayList<EstadoProblema> i) {
+	public PesquisaProfundidade(ArrayList<EstadoProblema> i) {
 		fechados = new HashMap<Integer, EstadoProblema>();
-		f = new Fronteira(new Largura());
+		f = new Fronteira(new Profundidade());
 		for (EstadoProblema e : i) {
 			f.junta(new No(e, null, 0));
 		}
@@ -60,9 +61,9 @@ public class PesquisaLargura {
 	}
 
 	public static void main(String[] args) {
-//		PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
-//		PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
+//		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleOito.getIniciais());
+		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleSeis.getIniciais());
+//		PesquisaProfundidade p = new PesquisaProfundidade(MissCan.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
@@ -82,9 +83,9 @@ public class PesquisaLargura {
 		System.out.println("Demorou: " + (c.getTimeInMillis() - t) + " ms");
 	}
 
-	private class Largura implements IAlgoritmo {
+	private class Profundidade implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-			lista.add(no);
+			lista.add(0,no);
 		}
 	}
 

@@ -5,14 +5,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.MissCan;
+import pt.upt.ia.problema.PuzzleOito;
 
-public class PesquisaLargura {
+public class PesquisaSofrega {
 	private Fronteira f;
 	private HashMap<Integer, EstadoProblema> fechados;
 	private int contaNos;
 
-	public PesquisaLargura(ArrayList<EstadoProblema> i) {
+	public PesquisaSofrega(ArrayList<EstadoProblema> i) {
 		fechados = new HashMap<Integer, EstadoProblema>();
 		f = new Fronteira(new Largura());
 		for (EstadoProblema e : i) {
@@ -60,9 +60,9 @@ public class PesquisaLargura {
 	}
 
 	public static void main(String[] args) {
-//		PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
-//		PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
+		PesquisaSofrega p = new PesquisaSofrega(PuzzleOito.getIniciais());
+//		PesquisaSofrega p = new PesquisaSofrega(PuzzleSeis.getIniciais());
+//		PesquisaSofrega p = new PesquisaSofrega(MissCan.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
@@ -84,7 +84,14 @@ public class PesquisaLargura {
 
 	private class Largura implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-			lista.add(no);
+			for (int i=0; i< lista.size(); i++) {
+				No n = lista.get(i);
+				if (n.h() >= no.h()) {
+					lista.add( i, no);
+					return;
+				}
+			}
+			lista.add( no);
 		}
 	}
 
