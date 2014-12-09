@@ -6,7 +6,6 @@ import pt.upt.ia.pesquisa.EstadoProblema;
 import pt.upt.ia.pesquisa.Ramo;
 public class PuzzleOito extends EstadoProblema {
     private int tab[][];
-    private String chave = null;
     private int hash = Integer.MAX_VALUE;
 
     public PuzzleOito(int[][] novo) {
@@ -54,16 +53,26 @@ public class PuzzleOito extends EstadoProblema {
 //        tab[2][2] = 3;
 
 // prof 24
-        tab[0][0] = 2;
+//        tab[0][0] = 2;
+//        tab[0][1] = 6;
+//        tab[0][2] = 7;
+//        tab[1][0] = 4;
+//        tab[1][1] = 1;
+//        tab[1][2] = 8;
+//        tab[2][0] = 5;
+//        tab[2][1] = 0;
+//        tab[2][2] = 3;
+
+// prof 29
+        tab[0][0] = 8;
         tab[0][1] = 6;
         tab[0][2] = 7;
         tab[1][0] = 4;
-        tab[1][1] = 1;
-        tab[1][2] = 8;
-        tab[2][0] = 5;
-        tab[2][1] = 0;
+        tab[1][1] = 0;
+        tab[1][2] = 5;
+        tab[2][0] = 2;
+        tab[2][1] = 1;
         tab[2][2] = 3;
-
     }
 
     public static ArrayList<EstadoProblema> getIniciais() {
@@ -191,17 +200,6 @@ public class PuzzleOito extends EstadoProblema {
         return 0;
     }
         
-    public String getChave() {
-        if (chave != null)
-            return chave;
-        String st = "";
-        for (int i=0; i<3; i++)
-            for (int j=0; j<3; j++)
-                st += tab[i][j];
-        chave = st;
-        return st;
-    }
-        
     public static void testa() {
         PuzzleOito p = new PuzzleOito();
         System.out.println("====================\n" + p);
@@ -213,7 +211,7 @@ public class PuzzleOito extends EstadoProblema {
     }
 
 	@Override
-	public int hashCode() {
+	public int getKey() {
 		if (hash != Integer.MAX_VALUE)
 			return hash;
 		int result = 0;
@@ -222,7 +220,7 @@ public class PuzzleOito extends EstadoProblema {
 				result = result * 10 + tab[l][c];
 			}
 		hash = result;
-		return result;
+		return hash;
 	}
 
 	@Override

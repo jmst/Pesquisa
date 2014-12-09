@@ -99,13 +99,9 @@ public class MissCan extends EstadoProblema {
         st += "  "+(3-nMissE)+"  "+(3-nCanE);
         return st;
     }
-    
-    public String getChave() {
-    	return ""+nMissE+nCanE+(barcoE?1:0);
-    }
-    
+   
     @Override
-	public int hashCode() {
+	public int getKey() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (barcoE ? 1231 : 1237);

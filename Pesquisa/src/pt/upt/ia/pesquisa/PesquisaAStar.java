@@ -5,16 +5,19 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import pt.upt.ia.problema.MissCan;
 import pt.upt.ia.problema.PuzzleOito;
+import pt.upt.ia.problema.PuzzleSeis;
+import pt.upt.ia.problema.ND;
 
 public class PesquisaAStar {
 
 	private Fronteira f;
-	private HashMap<Integer, EstadoProblema> fechados;
+	private HashMap<Integer, No> fechados;
 	private int contaNos;
 
 	public PesquisaAStar(ArrayList<EstadoProblema> i) {
-		fechados = new HashMap<Integer, EstadoProblema>();
+		fechados = new HashMap<Integer, No>();
 		f = new Fronteira(new AStar());
 		for (EstadoProblema e : i) {
 			f.junta(new No(e, null, 0));
@@ -34,19 +37,25 @@ public class PesquisaAStar {
 		//
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
-			ArrayList<No> suc = no.getSuc();
-			fechados.put(no.getEstado().hashCode(), no.getEstado());
-			for (No nosuc : suc) {
-				if (nosuc.getEstado().goal()) {
-					return nosuc;
+			boolean salta = false;
+			if (fechados.containsKey(no.getEstado().getKey())) {
+				No mem = fechados.get(no.getEstado().getKey());
+				if (mem.g() <= no.g()) {
+					salta = true;
 				}
-//				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
-//					continue;
-//				}
-				if (no.ciclo(nosuc)) {
-					continue;
+			}
+			if (! salta) {
+				ArrayList<No> suc = no.getSuc();
+				fechados.put(no.getEstado().getKey(), no);
+				for (No nosuc : suc) {
+					if (nosuc.getEstado().goal()) {
+						return nosuc;
+					}
+					if (no.ciclo(nosuc)) {
+						continue;
+					}
+					f.junta(nosuc);
 				}
-				f.junta(nosuc);
 			}
 			no = f.cabeca();
 			// estatistica
@@ -61,9 +70,10 @@ public class PesquisaAStar {
 	}
 
 	public static void main(String[] args) {
-		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
+		PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
 //		PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
 //		PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
+//		PesquisaAStar p = new PesquisaAStar(ND.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

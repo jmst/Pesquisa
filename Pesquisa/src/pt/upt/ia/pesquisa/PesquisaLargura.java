@@ -5,7 +5,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import pt.upt.ia.problema.PuzzleSeis;
+import pt.upt.ia.problema.PuzzleOito;
 import pt.upt.ia.problema.MissCan;
+import pt.upt.ia.problema.ND;
 
 public class PesquisaLargura {
 	private Fronteira f;
@@ -34,12 +37,12 @@ public class PesquisaLargura {
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
 			ArrayList<No> suc = no.getSuc();
-			fechados.put(no.getEstado().hashCode(), no.getEstado());
+			fechados.put(no.getEstado().getKey(), no.getEstado());
 			for (No nosuc : suc) {
 				if (nosuc.getEstado().goal()) {
 					return nosuc;
 				}
-				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
+				if (fechados.containsKey(nosuc.getEstado().getKey())) {
 					continue;
 				}
 				if (no.ciclo(nosuc)) {
@@ -62,7 +65,8 @@ public class PesquisaLargura {
 	public static void main(String[] args) {
 //		PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
 //		PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
+//		PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
+		PesquisaLargura p = new PesquisaLargura(ND.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

@@ -55,7 +55,7 @@ public class PuzzleSeis extends EstadoProblema {
 	}
 
 	@Override
-	public int hashCode() {
+	public int getKey() {
 		if (hash != Integer.MAX_VALUE)
 			return hash;
 		int result = 0;

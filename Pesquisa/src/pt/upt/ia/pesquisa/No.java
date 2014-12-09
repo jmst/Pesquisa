@@ -66,7 +66,7 @@ public class No {
     		return true;
     	No p = pai;
     	while ( p != null) {
-        	if (n.getEstado().hashCode() == p.getEstado().hashCode()) {
+        	if (n.getEstado().getKey() == p.getEstado().getKey()) {
         		return true;
         	}
         	p = p.getPai();

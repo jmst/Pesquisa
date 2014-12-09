@@ -7,6 +7,7 @@ import pt.upt.ia.pesquisa.Ramo;
 
 public class ND extends EstadoProblema {
     private int[] p;
+    private int hash = Integer.MAX_VALUE;
     
     public ND() {
         p = null;
@@ -19,6 +20,17 @@ public class ND extends EstadoProblema {
     public double h() {
         return 0;
     }
+
+	@Override
+	public int getKey() {
+		if (hash != Integer.MAX_VALUE)
+			return hash;
+		int result = 0;
+		for (int c=0; c<5; c++)
+			result = result * 10 + p[c];
+		hash = result;
+		return result;
+	}
     
     public ArrayList<Ramo> suc() {
         int[] np;

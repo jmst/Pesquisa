@@ -14,9 +14,7 @@ public abstract class EstadoProblema
         return "";
     }
     
-    public int hashCode() {
-    	return Integer.MAX_VALUE;
-    }
+    public abstract int getKey();
     
     public boolean equals( Object p) {
     	return false;

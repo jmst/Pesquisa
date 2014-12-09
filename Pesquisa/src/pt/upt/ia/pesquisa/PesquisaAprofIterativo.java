@@ -7,16 +7,19 @@ import java.util.HashMap;
 import java.util.List;
 
 import pt.upt.ia.problema.PuzzleSeis;
+import pt.upt.ia.problema.PuzzleOito;
+import pt.upt.ia.problema.MissCan;
+import pt.upt.ia.problema.ND;
 
 public class PesquisaAprofIterativo {
 	private Fronteira f;
-	private HashMap<Integer, EstadoProblema> fechados;
+	private HashMap<Integer, No> fechados;
 	private int contaNos;
 	private int maxima;
 
 	public PesquisaAprofIterativo(int prof, ArrayList<EstadoProblema> i) {
 		maxima = prof;
-		fechados = new HashMap<Integer, EstadoProblema>();
+		fechados = new HashMap<Integer, No>();
 		f = new Fronteira(new Profundidade());
 		for (EstadoProblema e : i) {
 			f.junta(new No(e, null, 0));
@@ -36,19 +39,24 @@ public class PesquisaAprofIterativo {
 		//
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
-			ArrayList<No> suc = no.getSuc();
-			fechados.put(no.getEstado().hashCode(), no.getEstado());
-			for (No nosuc : suc) {
-				if (nosuc.getEstado().goal()) {
-					return nosuc;
+			boolean salta = false;
+			if (fechados.containsKey(no.getEstado().getKey())) {
+				No n = fechados.get(no.getEstado().getKey());
+				if (n.getProfundidade() < no.getProfundidade())
+					salta = true;
+			}
+			if (! salta) {
+				ArrayList<No> suc = no.getSuc();
+				fechados.put(no.getEstado().getKey(), no);
+				for (No nosuc : suc) {
+					if (nosuc.getEstado().goal()) {
+						return nosuc;
+					}
+					if (no.ciclo(nosuc)) {
+						continue;
+					}
+					f.junta(nosuc);
 				}
-//				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
-//					continue;
-//				}
-				if (no.ciclo(nosuc)) {
-					continue;
-				}
-				f.junta(nosuc);
 			}
 			no = f.cabeca();
 			// estatistica
@@ -71,9 +79,10 @@ public class PesquisaAprofIterativo {
 		System.out.println("#########################################################");
 		while (no == null) {
 			limite++;
-//			p = new PesquisaAprofIterativo( limite, PuzzleOito.getIniciais());
-			p = new PesquisaAprofIterativo( limite, PuzzleSeis.getIniciais());
-	//		p = new PesquisaAprofIterativo( limite, MissCan.getIniciais());
+			p = new PesquisaAprofIterativo( limite, PuzzleOito.getIniciais());
+//			p = new PesquisaAprofIterativo( limite, PuzzleSeis.getIniciais());
+//			p = new PesquisaAprofIterativo( limite, MissCan.getIniciais());
+//			p = new PesquisaAprofIterativo( limite, ND.getIniciais());
 	
 			no = p.resolve();
 		}
@@ -93,7 +102,7 @@ public class PesquisaAprofIterativo {
 
 	private class Profundidade implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-	        if (no.getProfundidade() < maxima)
+	        if (no.getProfundidade() <= maxima)
 	            lista.add( 0, no);
 		}
 	}

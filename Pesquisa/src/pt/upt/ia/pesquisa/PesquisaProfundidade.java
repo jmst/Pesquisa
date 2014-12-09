@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import pt.upt.ia.problema.PuzzleSeis;
+import pt.upt.ia.problema.PuzzleOito;
+import pt.upt.ia.problema.MissCan;
+import pt.upt.ia.problema.ND;
 
 public class PesquisaProfundidade {
 	private Fronteira f;
@@ -34,19 +37,22 @@ public class PesquisaProfundidade {
 		//
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
-			ArrayList<No> suc = no.getSuc();
-			fechados.put(no.getEstado().hashCode(), no.getEstado());
-			for (No nosuc : suc) {
-				if (nosuc.getEstado().goal()) {
-					return nosuc;
+			boolean salta = false;
+			if (fechados.containsKey(no.getEstado().getKey())) {
+				salta = true;
+			}
+			if (! salta) {
+				ArrayList<No> suc = no.getSuc();
+				fechados.put(no.getEstado().getKey(), no.getEstado());
+				for (No nosuc : suc) {
+					if (nosuc.getEstado().goal()) {
+						return nosuc;
+					}
+					if (no.ciclo(nosuc)) {
+						continue;
+					}
+					f.junta(nosuc);
 				}
-				if (fechados.containsKey(nosuc.getEstado().hashCode())) {
-					continue;
-				}
-				if (no.ciclo(nosuc)) {
-					continue;
-				}
-				f.junta(nosuc);
 			}
 			no = f.cabeca();
 			// estatistica
@@ -61,9 +67,10 @@ public class PesquisaProfundidade {
 	}
 
 	public static void main(String[] args) {
-//		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleOito.getIniciais());
-		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleSeis.getIniciais());
+		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleOito.getIniciais());
+//		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleSeis.getIniciais());
 //		PesquisaProfundidade p = new PesquisaProfundidade(MissCan.getIniciais());
+//		PesquisaProfundidade p = new PesquisaProfundidade(ND.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
