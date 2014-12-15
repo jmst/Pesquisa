@@ -5,10 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.MissCan;
-import pt.upt.ia.problema.PuzzleOito;
-import pt.upt.ia.problema.PuzzleSeis;
-import pt.upt.ia.problema.ND;
+import pt.upt.ia.problema.ND6;
 
 public class PesquisaAStar {
 
@@ -70,10 +67,11 @@ public class PesquisaAStar {
 	}
 
 	public static void main(String[] args) {
-		PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
+//		PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
 //		PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
 //		PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
 //		PesquisaAStar p = new PesquisaAStar(ND.getIniciais());
+		PesquisaAStar p = new PesquisaAStar(ND6.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

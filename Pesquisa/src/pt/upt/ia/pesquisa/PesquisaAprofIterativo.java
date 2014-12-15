@@ -6,10 +6,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.PuzzleSeis;
-import pt.upt.ia.problema.PuzzleOito;
-import pt.upt.ia.problema.MissCan;
-import pt.upt.ia.problema.ND;
+import pt.upt.ia.problema.ND6;
 
 public class PesquisaAprofIterativo {
 	private Fronteira f;
@@ -79,10 +76,11 @@ public class PesquisaAprofIterativo {
 		System.out.println("#########################################################");
 		while (no == null) {
 			limite++;
-			p = new PesquisaAprofIterativo( limite, PuzzleOito.getIniciais());
+//			p = new PesquisaAprofIterativo( limite, PuzzleOito.getIniciais());
 //			p = new PesquisaAprofIterativo( limite, PuzzleSeis.getIniciais());
 //			p = new PesquisaAprofIterativo( limite, MissCan.getIniciais());
 //			p = new PesquisaAprofIterativo( limite, ND.getIniciais());
+			p = new PesquisaAprofIterativo( limite, ND6.getIniciais());
 	
 			no = p.resolve();
 		}
