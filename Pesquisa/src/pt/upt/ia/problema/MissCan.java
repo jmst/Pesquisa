@@ -127,6 +127,17 @@ public class MissCan extends EstadoProblema {
 			return false;
 		return true;
 	}
+
+	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// distintivo
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = nMissE;
+		result = (result * prime) + nCanE;
+		result = (result * prime) + (barcoE ? 1 : 2);
+		return result;
+	}
     
     private boolean valida( int nme, int nce) {
         if (nme < 0 || nme > 3 || nce < 0 || nce > 3)

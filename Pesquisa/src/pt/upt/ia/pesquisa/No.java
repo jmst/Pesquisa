@@ -15,7 +15,7 @@ public class No {
         this.pai = pai;
         if (pai == null) {
             g = custo;
-            profundidade = 1;
+            profundidade = 0;
         	f = g() + h();
         }
         else {

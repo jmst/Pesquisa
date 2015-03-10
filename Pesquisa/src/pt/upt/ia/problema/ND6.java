@@ -46,11 +46,8 @@ public class ND6 extends EstadoProblema {
 	public int getKey() {
 		if (hash != Integer.MAX_VALUE)
 			return hash;
-		int result = 0;
-		for (int c=0; c<7; c++)
-			result = result * 10 + p[c];
-		hash = result;
-		return result;
+		hash = hashCode();
+		return hash;
 	}
     
     public ArrayList<Ramo> suc() {
@@ -97,7 +94,35 @@ public class ND6 extends EstadoProblema {
     public boolean goal() {
         return p[0] == 6 && p[1] == 5 && p[2] == 4 && p[3] == 0 && p[4] == 3 && p[5] == 2 && p[6] == 1;
     }
+
+    public int get(int i) {
+    	return p[i];
+    }
     
+	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// distintivo
+	@Override
+	public int hashCode() {
+		int result = 0;
+		for (int c=0; c<7; c++)
+			result = result * 10 + p[c];
+		return result;
+	}
+   
+	public boolean equals( Object o) {
+		if (o == null) // null não é igual
+			return false;
+		if (o.getClass() != ND6.class) // classe diferente: não é igual
+			return false;
+		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+			return true;
+		ND6 oo = (ND6) o;
+		for (int i=0; i<7; i++)
+			if (p[i] != oo.get(i))
+				return false;
+		return true;
+	}
+	
     public static ArrayList<EstadoProblema> getIniciais() {
         ArrayList<EstadoProblema> i = new ArrayList<EstadoProblema>();
         int[] p = {1,2,3,0,4,5,6};

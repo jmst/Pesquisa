@@ -2,19 +2,21 @@ package pt.upt.ia.pesquisa;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import pt.upt.ia.problema.ND6;
+import pt.upt.ia.problema.PuzzleOito;
 
+// Pesquisa A* em grafo
 public class PesquisaAStar {
 
 	private Fronteira f;
-	private HashMap<Integer, No> fechados;
+	private Set<EstadoProblema> fechados;
 	private int contaNos;
 
 	public PesquisaAStar(ArrayList<EstadoProblema> i) {
-		fechados = new HashMap<Integer, No>();
+		fechados = new HashSet<EstadoProblema>();
 		f = new Fronteira(new AStar());
 		for (EstadoProblema e : i) {
 			f.junta(new No(e, null, 0));
@@ -33,25 +35,24 @@ public class PesquisaAStar {
 	public No resolve() {
 		//
 		No no = f.cabeca();
-		while (no != null && !no.getEstado().goal()) {
-			boolean salta = false;
-			if (fechados.containsKey(no.getEstado().getKey())) {
-				No mem = fechados.get(no.getEstado().getKey());
-				if (mem.g() <= no.g()) {
-					salta = true;
-				}
+		while (no != null) {
+			if (no.getEstado().goal()) {
+				return no;
 			}
-			if (! salta) {
-				ArrayList<No> suc = no.getSuc();
-				fechados.put(no.getEstado().getKey(), no);
-				for (No nosuc : suc) {
-					if (nosuc.getEstado().goal()) {
-						return nosuc;
-					}
-					if (no.ciclo(nosuc)) {
-						continue;
-					}
+			ArrayList<No> suc = no.getSuc();
+			fechados.add(no.getEstado());
+			for (No nosuc : suc) {
+				if (fechados.contains(nosuc.getEstado())) {
+					continue;
+				}
+				No copia = f.contemEstado( nosuc);
+				if (copia == null) {
 					f.junta(nosuc);
+					continue;
+				}
+				if (copia.f() > nosuc.f()) {
+					f.remove( copia);
+					f.junta( nosuc);
 				}
 			}
 			no = f.cabeca();
@@ -67,11 +68,11 @@ public class PesquisaAStar {
 	}
 
 	public static void main(String[] args) {
-//		PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
-//		PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
-//		PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
-//		PesquisaAStar p = new PesquisaAStar(ND.getIniciais());
-		PesquisaAStar p = new PesquisaAStar(ND6.getIniciais());
+		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
+		// PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
+		// PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(ND.getIniciais());
+//		PesquisaAStar p = new PesquisaAStar(ND6.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

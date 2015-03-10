@@ -54,6 +54,21 @@ public class Grafo extends EstadoProblema {
     public int getKey() {
     	return numero;
     }
+
+    public int hashCode() {
+    	return numero;
+    }
+
+    public boolean equals( Object o) {
+    	if (o == null)
+    		return false;
+		if (o.getClass() != Grafo.class) // classe diferente: não é igual
+			return false;
+		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+			return true;
+		Grafo g = (Grafo) o;
+    	return numero == g.getKey();
+    }
     
     public ArrayList<Ramo> suc() {
     	ArrayList<Ramo> s = new ArrayList<Ramo>();

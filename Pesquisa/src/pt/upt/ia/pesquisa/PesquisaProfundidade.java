@@ -1,6 +1,5 @@
 package pt.upt.ia.pesquisa;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -34,11 +33,7 @@ public class PesquisaProfundidade {
 		//
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
-			boolean salta = false;
-			if (fechados.containsKey(no.getEstado().getKey())) {
-				salta = true;
-			}
-			if (! salta) {
+			if (!fechados.containsKey(no.getEstado().getKey())) {
 				ArrayList<No> suc = no.getSuc();
 				fechados.put(no.getEstado().getKey(), no.getEstado());
 				for (No nosuc : suc) {
@@ -48,7 +43,10 @@ public class PesquisaProfundidade {
 					if (no.ciclo(nosuc)) {
 						continue;
 					}
-					f.junta(nosuc);
+					No copia = f.contemEstado(nosuc);
+					if (copia == null) {
+						f.junta(nosuc);
+					}
 				}
 			}
 			no = f.cabeca();
@@ -64,11 +62,13 @@ public class PesquisaProfundidade {
 	}
 
 	public static void main(String[] args) {
-//		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleOito.getIniciais());
+		// PesquisaProfundidade p = new
+		// PesquisaProfundidade(PuzzleOito.getIniciais());
 //		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleSeis.getIniciais());
-//		PesquisaProfundidade p = new PesquisaProfundidade(MissCan.getIniciais());
-//		PesquisaProfundidade p = new PesquisaProfundidade(ND.getIniciais());
-		PesquisaProfundidade p = new PesquisaProfundidade(ND6.getIniciais());
+		// PesquisaProfundidade p = new
+		// PesquisaProfundidade(MissCan.getIniciais());
+		// PesquisaProfundidade p = new PesquisaProfundidade(ND.getIniciais());
+		 PesquisaProfundidade p = new PesquisaProfundidade(ND6.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
@@ -90,7 +90,7 @@ public class PesquisaProfundidade {
 
 	private class Profundidade implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-			lista.add(0,no);
+			lista.add(0, no);
 		}
 	}
 

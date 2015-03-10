@@ -16,7 +16,7 @@ public abstract class EstadoProblema
     
     public abstract int getKey();
     
-    public boolean equals( Object p) {
-    	return false;
-    }
+    public abstract boolean equals( Object p);
+    
+    public abstract int hashCode();
 }

@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import pt.upt.ia.pesquisa.EstadoProblema;
 import pt.upt.ia.pesquisa.Ramo;
 public class PuzzleSeis extends EstadoProblema {
+    private int hash = Integer.MAX_VALUE;
 	
 // prof 7
 //	private int tab[][] = {{1,0,0,0,0,6},{2,3,0,0,4,5}};
 	
 // prof 9
-	private int tab[][] = {{1,4,0,0,0,6},{2,3,0,0,0,5}};
+//	private int tab[][] = {{1,4,0,0,0,6},{2,3,0,0,0,5}};
 	
 // prof 13	
-//	private int tab[][] = {{1,4,0,5,3,6},{0,0,0,2,0,0}};
-
-	private int hash = Integer.MAX_VALUE;
+	private int tab[][] = {{1,4,0,5,3,6},{0,0,0,2,0,0}};
 
 	public PuzzleSeis(int[][] novo) {
 		tab = new int[2][6];
@@ -58,14 +57,39 @@ public class PuzzleSeis extends EstadoProblema {
 	public int getKey() {
 		if (hash != Integer.MAX_VALUE)
 			return hash;
+		hash = hashCode();
+		return hash;
+	}
+
+	@Override
+	public int hashCode() {
 		int result = 0;
 		for (int l=0; l<2; l++)
 			for (int c=0; c<6; c++) {
 				result = result * 7 + tab[l][c];
 			}
-		hash = result;
 		return result;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) // null não é igual
+			return false;
+		if (o.getClass() != PuzzleSeis.class) // classe diferente: não é igual
+			return false;
+		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+			return true;
+		PuzzleSeis oo = (PuzzleSeis) o;
+		for (int i=0; i<2; i++)
+			for (int j=0; j<6; j++)
+			if (tab[i][j] != oo.get(i,j))
+				return false;
+		return true;
+	}
+
+    public int get(int i, int j) {
+    	return tab[i][j];
+    }
 
 	@Override
 	public ArrayList<Ramo> suc() {

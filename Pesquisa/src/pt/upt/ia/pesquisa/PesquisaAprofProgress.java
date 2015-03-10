@@ -2,19 +2,21 @@ package pt.upt.ia.pesquisa;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 
 import pt.upt.ia.problema.PuzzleOito;
 
-public class PesquisaSofrega {
+public class PesquisaAprofProgress {
 	private Fronteira f;
-	private HashSet<EstadoProblema> fechados;
+	private HashMap<Integer, No> fechados;
 	private int contaNos;
+	private int maxima;
 
-	public PesquisaSofrega(ArrayList<EstadoProblema> i) {
-		fechados = new HashSet<EstadoProblema>();
-		f = new Fronteira(new Sofrega());
+	public PesquisaAprofProgress(int prof, ArrayList<EstadoProblema> i) {
+		maxima = prof;
+		fechados = new HashMap<Integer, No>();
+		f = new Fronteira(new Profundidade());
 		for (EstadoProblema e : i) {
 			f.junta(new No(e, null, 0));
 		}
@@ -33,9 +35,15 @@ public class PesquisaSofrega {
 		//
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
-			if (!fechados.contains(no.getEstado())) {
+			boolean salta = false;
+			if (fechados.containsKey(no.getEstado().getKey())) {
+				No n = fechados.get(no.getEstado().getKey());
+				if (n.getProfundidade() < no.getProfundidade())
+					salta = true;
+			}
+			if (!salta) {
 				ArrayList<No> suc = no.getSuc();
-				fechados.add(no.getEstado());
+				fechados.put(no.getEstado().getKey(), no);
 				for (No nosuc : suc) {
 					if (nosuc.getEstado().goal()) {
 						return nosuc;
@@ -43,11 +51,6 @@ public class PesquisaSofrega {
 					if (no.ciclo(nosuc)) {
 						continue;
 					}
-					// já está na lista de nós fechados?
-					if (fechados.contains(nosuc.getEstado())) {
-						continue;
-					}
-					// já está na lista fronteira?
 					No copia = f.contemEstado(nosuc);
 					if (copia == null) {
 						f.junta(nosuc);
@@ -60,23 +63,29 @@ public class PesquisaSofrega {
 			if (contaNos % 10000 == 0) {
 				System.out.println(no);
 				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
-						+ String.format("%1$,10d", f.getContagem()));
+						+ String.format("%1$,5d", f.getContagem()) + "      limite: " + maxima);
 			}
 		}
 		return null;
 	}
 
 	public static void main(String[] args) {
-		PesquisaSofrega p = new PesquisaSofrega(PuzzleOito.getIniciais());
-//		 PesquisaSofrega p = new PesquisaSofrega(PuzzleSeis.getIniciais());
-//		 PesquisaSofrega p = new PesquisaSofrega(MissCan.getIniciais());
-		// PesquisaSofrega p = new PesquisaSofrega(ND.getIniciais());
-		// PesquisaSofrega p = new PesquisaSofrega(ND6.getIniciais());
-
+		PesquisaAprofProgress p = null;
 		Calendar c = Calendar.getInstance();
+		No no = null;
+		int limite = 5;
 		long t = c.getTimeInMillis();
 		System.out.println("#########################################################");
-		No no = p.resolve();
+		while (no == null) {
+			limite++;
+			p = new PesquisaAprofProgress(limite, PuzzleOito.getIniciais());
+			// p = new PesquisaAprofProgress( limite, PuzzleSeis.getIniciais());
+			// p = new PesquisaAprofProgress( limite, MissCan.getIniciais());
+			// p = new PesquisaAprofProgress( limite, ND.getIniciais());
+			// p = new PesquisaAprofProgress( limite, ND6.getIniciais());
+
+			no = p.resolve();
+		}
 		System.out.println("===========================");
 		if (no != null) {
 			no.escrevePais();
@@ -84,23 +93,17 @@ public class PesquisaSofrega {
 			System.out.println("Sem solução");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,10d", p.getContaNos()) + "    fronteira: "
-				+ String.format("%1$,10d", p.getFronteira().getContagem()));
+				+ String.format("%1$,10d", p.getFronteira().getContagem()) + "      limite: " + limite);
 		System.out.println("~~~~~~~~ FIM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		c = Calendar.getInstance();
 		System.out.println("Demorou: " + (c.getTimeInMillis() - t) + " ms");
 	}
 
-	private class Sofrega implements IAlgoritmo {
+	private class Profundidade implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-			for (int i = 0; i < lista.size(); i++) {
-				No n = lista.get(i);
-				if (n.h() >= no.h()) {
-					lista.add(i, no);
-					return;
-				}
-			}
-			lista.add(no);
+			if (no.getProfundidade() <= maxima)
+				lista.add(0, no);
 		}
 	}
 

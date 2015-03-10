@@ -1,6 +1,5 @@
 package pt.upt.ia.pesquisa;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -42,7 +41,7 @@ public class PesquisaProfLimitada {
 				if (n.getProfundidade() < no.getProfundidade())
 					salta = true;
 			}
-			if (! salta) {
+			if (!salta) {
 				ArrayList<No> suc = no.getSuc();
 				fechados.put(no.getEstado().getKey(), no);
 				for (No nosuc : suc) {
@@ -52,7 +51,10 @@ public class PesquisaProfLimitada {
 					if (no.ciclo(nosuc)) {
 						continue;
 					}
-					f.junta(nosuc);
+					No copia = f.contemEstado(nosuc);
+					if (copia == null) {
+						f.junta(nosuc);
+					}
 				}
 			}
 			no = f.cabeca();
@@ -68,11 +70,15 @@ public class PesquisaProfLimitada {
 	}
 
 	public static void main(String[] args) {
-//		PesquisaProfLimitada p = new PesquisaProfLimitada( 30, PuzzleOito.getIniciais());
-//		PesquisaProfLimitada p = new PesquisaProfLimitada( 15, PuzzleSeis.getIniciais());
-//		PesquisaProfLimitada p = new PesquisaProfLimitada( 15, MissCan.getIniciais());
-//		PesquisaProfLimitada p = new PesquisaProfLimitada( 24, ND.getIniciais());
-		PesquisaProfLimitada p = new PesquisaProfLimitada( 28, ND6.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 30,
+		// PuzzleOito.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 15,
+		// PuzzleSeis.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 15,
+		// MissCan.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 24,
+		// ND.getIniciais());
+		PesquisaProfLimitada p = new PesquisaProfLimitada(28, ND6.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
@@ -94,8 +100,8 @@ public class PesquisaProfLimitada {
 
 	private class Profundidade implements IAlgoritmo {
 		public void insere(List<No> lista, No no) {
-	        if (no.getProfundidade() < maxima)
-	            lista.add( 0, no);
+			if (no.getProfundidade() < maxima)
+				lista.add(0, no);
 		}
 	}
 

@@ -76,7 +76,6 @@ public class PuzzleOito extends EstadoProblema {
     }
 
     public static ArrayList<EstadoProblema> getIniciais() {
-        int[][] tab = new int[3][3];
         ArrayList<EstadoProblema> lista = new ArrayList<EstadoProblema>();
         lista.add(new PuzzleOito());
         return lista;
@@ -214,27 +213,40 @@ public class PuzzleOito extends EstadoProblema {
 	public int getKey() {
 		if (hash != Integer.MAX_VALUE)
 			return hash;
+		hash = hashCode();
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null) // null não é igual
+			return false;
+		if (o.getClass() != PuzzleOito.class) // classe diferente: não é igual
+			return false;
+		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+			return true;
+		PuzzleOito oo = (PuzzleOito) o;
+		for (int i=0; i<3; i++)
+			for (int j=0; j<3; j++)
+			if (tab[i][j] != oo.get(i,j))
+				return false;
+		return true;
+	}
+
+    public int get(int i, int j) {
+    	return tab[i][j];
+    }
+    
+	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// distintivo
+	@Override
+	public int hashCode() {
 		int result = 0;
 		for (int l=0; l<3; l++)
 			for (int c=0; c<3; c++) {
 				result = result * 10 + tab[l][c];
 			}
-		hash = result;
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PuzzleOito other = (PuzzleOito) obj;
-		if (!Arrays.deepEquals(tab, other.tab))
-			return false;
-		return true;
+		return result;
 	}
 
 }

@@ -25,11 +25,8 @@ public class ND extends EstadoProblema {
 	public int getKey() {
 		if (hash != Integer.MAX_VALUE)
 			return hash;
-		int result = 0;
-		for (int c=0; c<5; c++)
-			result = result * 10 + p[c];
-		hash = result;
-		return result;
+		hash = hashCode();
+		return hash;
 	}
     
     public ArrayList<Ramo> suc() {
@@ -83,6 +80,34 @@ public class ND extends EstadoProblema {
         i.add( new ND( p));
         return i;
     }
+
+    public int get(int i) {
+    	return p[i];
+    }
+    
+	public boolean equals( Object o) {
+		if (o == null) // null não é igual
+			return false;
+		if (o.getClass() != ND.class) // classe diferente: não é igual
+			return false;
+		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+			return true;
+		ND oo = (ND) o;
+		for (int i=0; i<5; i++)
+			if (p[i] != oo.get(i))
+				return false;
+		return true;
+	}
+
+	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// distintivo
+	@Override
+	public int hashCode() {
+		int result = 0;
+		for (int i=0; i<5; i++)
+			result = result*10+p[i];
+		return result;
+	}
     
     public String toString() {
         return "" + p[0]+ "  "+p[1]+ "  "+p[2]+ "  "+p[3]+ "  "+p[4];
