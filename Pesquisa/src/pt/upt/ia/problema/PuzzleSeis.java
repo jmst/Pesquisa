@@ -9,11 +9,8 @@ public class PuzzleSeis extends EstadoProblema {
 // prof 7
 //	private int tab[][] = {{1,0,0,0,0,6},{2,3,0,0,4,5}};
 	
-// prof 9
-//	private int tab[][] = {{1,4,0,0,0,6},{2,3,0,0,0,5}};
-	
-// prof 13	
-	private int tab[][] = {{1,4,0,5,3,6},{0,0,0,2,0,0}};
+// prof 9	
+	private int tab[][] = {{1,4,0,5,0,6},{0,0,2,3,0,0}};
 
 	public PuzzleSeis(int[][] novo) {
 		tab = new int[2][6];

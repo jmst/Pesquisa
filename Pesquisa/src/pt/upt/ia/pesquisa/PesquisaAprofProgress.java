@@ -79,10 +79,10 @@ public class PesquisaAprofProgress {
 		while (no == null) {
 			limite++;
 			p = new PesquisaAprofProgress(limite, PuzzleOito.getIniciais());
-			// p = new PesquisaAprofProgress( limite, PuzzleSeis.getIniciais());
+//			 p = new PesquisaAprofProgress( limite, PuzzleSeis.getIniciais());
 			// p = new PesquisaAprofProgress( limite, MissCan.getIniciais());
 			// p = new PesquisaAprofProgress( limite, ND.getIniciais());
-			// p = new PesquisaAprofProgress( limite, ND6.getIniciais());
+//			 p = new PesquisaAprofProgress( limite, ND6.getIniciais());
 
 			no = p.resolve();
 		}

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.ND6;
+import pt.upt.ia.problema.Baldes49;
 
 public class PesquisaProfundidade {
 	private Fronteira f;
@@ -62,13 +62,12 @@ public class PesquisaProfundidade {
 	}
 
 	public static void main(String[] args) {
-		// PesquisaProfundidade p = new
-		// PesquisaProfundidade(PuzzleOito.getIniciais());
+		// PesquisaProfundidade p = new PesquisaProfundidade(PuzzleOito.getIniciais());
 //		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleSeis.getIniciais());
-		// PesquisaProfundidade p = new
-		// PesquisaProfundidade(MissCan.getIniciais());
+		// PesquisaProfundidade p = new PesquisaProfundidade(MissCan.getIniciais());
 		// PesquisaProfundidade p = new PesquisaProfundidade(ND.getIniciais());
-		 PesquisaProfundidade p = new PesquisaProfundidade(ND6.getIniciais());
+		PesquisaLargura p = new PesquisaLargura(Baldes49.getIniciais());
+//		 PesquisaProfundidade p = new PesquisaProfundidade(ND6.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pt.upt.ia.problema.PuzzleOito;
+import pt.upt.ia.problema.Baldes49;
 
 public class PesquisaLargura {
 	private Fronteira f;
@@ -64,8 +64,10 @@ public class PesquisaLargura {
 	}
 
 	public static void main(String[] args) {
+//		PesquisaLargura p = new PesquisaLargura(Mochila.getIniciais());
+		PesquisaLargura p = new PesquisaLargura(Baldes49.getIniciais());
 //		PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
+//		PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
 //		PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
 //		PesquisaLargura p = new PesquisaLargura(ND.getIniciais());
 //		PesquisaLargura p = new PesquisaLargura(ND6.getIniciais());

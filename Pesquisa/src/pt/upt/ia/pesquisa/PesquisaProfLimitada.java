@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.ND6;
+import pt.upt.ia.problema.PuzzleSeis;
 
 public class PesquisaProfLimitada {
 	private Fronteira f;
@@ -72,13 +72,12 @@ public class PesquisaProfLimitada {
 	public static void main(String[] args) {
 		// PesquisaProfLimitada p = new PesquisaProfLimitada( 30,
 		// PuzzleOito.getIniciais());
-		// PesquisaProfLimitada p = new PesquisaProfLimitada( 15,
-		// PuzzleSeis.getIniciais());
+		 PesquisaProfLimitada p = new PesquisaProfLimitada( 16, PuzzleSeis.getIniciais());
 		// PesquisaProfLimitada p = new PesquisaProfLimitada( 15,
 		// MissCan.getIniciais());
 		// PesquisaProfLimitada p = new PesquisaProfLimitada( 24,
 		// ND.getIniciais());
-		PesquisaProfLimitada p = new PesquisaProfLimitada(28, ND6.getIniciais());
+//		PesquisaProfLimitada p = new PesquisaProfLimitada(24, ND6.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

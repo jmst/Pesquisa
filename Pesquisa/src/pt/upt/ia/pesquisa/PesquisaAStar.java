@@ -69,10 +69,11 @@ public class PesquisaAStar {
 
 	public static void main(String[] args) {
 		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
-		// PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
-		// PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(ND.getIniciais());
 //		PesquisaAStar p = new PesquisaAStar(ND6.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(Grafo.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

@@ -150,7 +150,7 @@ public class MissCan extends EstadoProblema {
     }
  
     public static void main( String[] args) {
-	    MissCan mc = new MissCan( 2,2,false);
+	    MissCan mc = new MissCan( 3,2,true);
 	    ArrayList<Ramo> s = mc.suc();
 	    System.out.println("-------------");
 	    System.out.println(mc);
