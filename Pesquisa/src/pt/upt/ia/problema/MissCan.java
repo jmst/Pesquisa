@@ -1,11 +1,11 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.EstadoProblema;
+import pt.upt.ia.pesquisa.Estado;
 import pt.upt.ia.pesquisa.Ramo;
 
 
-public class MissCan extends EstadoProblema {
+public class MissCan extends Estado {
     private int nMissE;
     private int nCanE;
     private boolean barcoE;
@@ -86,8 +86,8 @@ public class MissCan extends EstadoProblema {
         return nMissE == 0 && nCanE == 0;
     }
     
-    public static ArrayList<EstadoProblema> getIniciais() {
-        ArrayList<EstadoProblema> i = new ArrayList<EstadoProblema>();
+    public static ArrayList<Estado> getIniciais() {
+        ArrayList<Estado> i = new ArrayList<Estado>();
         i.add( new MissCan( 3, 3, true));
         return i;
     }
@@ -150,7 +150,7 @@ public class MissCan extends EstadoProblema {
     }
  
     public static void main( String[] args) {
-	    MissCan mc = new MissCan( 3,2,true);
+	    MissCan mc = new MissCan( 3,1,true);
 	    ArrayList<Ramo> s = mc.suc();
 	    System.out.println("-------------");
 	    System.out.println(mc);

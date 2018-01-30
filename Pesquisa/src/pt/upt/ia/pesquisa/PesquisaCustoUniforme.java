@@ -12,13 +12,13 @@ import pt.upt.ia.problema.Grafo;
 public class PesquisaCustoUniforme {
 
 		private Fronteira f;
-		private Set<EstadoProblema> fechados;
+		private Set<Estado> fechados;
 		private int contaNos;
 
-		public PesquisaCustoUniforme(ArrayList<EstadoProblema> i) {
-			fechados = new HashSet<EstadoProblema>();
+		public PesquisaCustoUniforme(ArrayList<Estado> i) {
+			fechados = new HashSet<Estado>();
 			f = new Fronteira(new CustoUniforme());
-			for (EstadoProblema e : i) {
+			for (Estado e : i) {
 				f.junta(new No(e, null, 0));
 			}
 			contaNos = 0;

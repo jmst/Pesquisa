@@ -41,10 +41,10 @@ public class Fronteira {
 	}
 
 	public void imprime() {
-		System.out.println("\n..................");
 		for (No n : lista) {
-			System.out.println(n);
+			System.out.print("  "+n.repr());
 		}
+		System.out.println();
 	}
 
 }

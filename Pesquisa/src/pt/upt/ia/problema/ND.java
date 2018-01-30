@@ -1,11 +1,11 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.EstadoProblema;
+import pt.upt.ia.pesquisa.Estado;
 import pt.upt.ia.pesquisa.Ramo;
 
 
-public class ND extends EstadoProblema {
+public class ND extends Estado {
     private int[] p;
     private int hash = Integer.MAX_VALUE;
     
@@ -74,8 +74,8 @@ public class ND extends EstadoProblema {
         return p[0] == 2 && p[1] == 2 && p[3] == 1 && p[4] == 1;
     }
     
-    public static ArrayList<EstadoProblema> getIniciais() {
-        ArrayList<EstadoProblema> i = new ArrayList<EstadoProblema>();
+    public static ArrayList<Estado> getIniciais() {
+        ArrayList<Estado> i = new ArrayList<Estado>();
         int[] p = {1,1,0,2,2};
         i.add( new ND( p));
         return i;
@@ -110,7 +110,7 @@ public class ND extends EstadoProblema {
 	}
     
     public String toString() {
-        return "" + p[0]+ "  "+p[1]+ "  "+p[2]+ "  "+p[3]+ "  "+p[4];
+        return "" + p[0]+ " "+p[1]+ " "+p[2]+ " "+p[3]+ " "+p[4];
     }
 
     public static void main( String[] args) {

@@ -13,11 +13,11 @@ public class PesquisaProfLimitada {
 	private int contaNos;
 	private int maxima;
 
-	public PesquisaProfLimitada(int prof, ArrayList<EstadoProblema> i) {
+	public PesquisaProfLimitada(int prof, ArrayList<Estado> i) {
 		maxima = prof;
 		fechados = new HashMap<Integer, No>();
 		f = new Fronteira(new Profundidade());
-		for (EstadoProblema e : i) {
+		for (Estado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;

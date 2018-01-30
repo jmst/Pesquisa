@@ -2,9 +2,9 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import pt.upt.ia.pesquisa.EstadoProblema;
+import pt.upt.ia.pesquisa.Estado;
 import pt.upt.ia.pesquisa.Ramo;
-public class PuzzleOito extends EstadoProblema {
+public class PuzzleOito extends Estado {
     private int tab[][];
     private int hash = Integer.MAX_VALUE;
 
@@ -75,8 +75,8 @@ public class PuzzleOito extends EstadoProblema {
 //        tab[2][2] = 3;
     }
 
-    public static ArrayList<EstadoProblema> getIniciais() {
-        ArrayList<EstadoProblema> lista = new ArrayList<EstadoProblema>();
+    public static ArrayList<Estado> getIniciais() {
+        ArrayList<Estado> lista = new ArrayList<Estado>();
         lista.add(new PuzzleOito());
         return lista;
     }

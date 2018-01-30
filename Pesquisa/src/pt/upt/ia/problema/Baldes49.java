@@ -2,14 +2,14 @@ package pt.upt.ia.problema;
 
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.EstadoProblema;
+import pt.upt.ia.pesquisa.Estado;
 import pt.upt.ia.pesquisa.Ramo;
 
 //
 // dois baldes, de 9 e 4 litros
 // medir 6 litros no primeiro balde
 //
-public class Baldes49 extends EstadoProblema {
+public class Baldes49 extends Estado {
 	private int b9;
 	private int b4;
 
@@ -59,8 +59,8 @@ public class Baldes49 extends EstadoProblema {
 		return b9 == 6;
 	}
 
-	public static ArrayList<EstadoProblema> getIniciais() {
-		ArrayList<EstadoProblema> i = new ArrayList<EstadoProblema>();
+	public static ArrayList<Estado> getIniciais() {
+		ArrayList<Estado> i = new ArrayList<Estado>();
 		i.add(new Baldes49(0, 0));
 		return i;
 	}

@@ -1,11 +1,11 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.EstadoProblema;
+import pt.upt.ia.pesquisa.Estado;
 import pt.upt.ia.pesquisa.Ramo;
 
 
-public class Grafo extends EstadoProblema {
+public class Grafo extends Estado {
 
 	public static int[][] t = {	
 //         1           5             10             15             20             25             30
@@ -84,8 +84,8 @@ public class Grafo extends EstadoProblema {
     	return numero == 29;		// ESTADO FINAL
     }
     
-    public static ArrayList<EstadoProblema> getIniciais() {
-    	ArrayList<EstadoProblema> i = new ArrayList<EstadoProblema>();
+    public static ArrayList<Estado> getIniciais() {
+    	ArrayList<Estado> i = new ArrayList<Estado>();
     	i.add( new Grafo(1));		// ESTADO INICIAL
     	return i;
     }

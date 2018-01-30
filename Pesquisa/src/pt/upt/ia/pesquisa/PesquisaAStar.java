@@ -12,13 +12,13 @@ import pt.upt.ia.problema.PuzzleOito;
 public class PesquisaAStar {
 
 	private Fronteira f;
-	private Set<EstadoProblema> fechados;
+	private Set<Estado> fechados;
 	private int contaNos;
 
-	public PesquisaAStar(ArrayList<EstadoProblema> i) {
-		fechados = new HashSet<EstadoProblema>();
+	public PesquisaAStar(ArrayList<Estado> i) {
+		fechados = new HashSet<Estado>();
 		f = new Fronteira(new AStar());
-		for (EstadoProblema e : i) {
+		for (Estado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;

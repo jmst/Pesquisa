@@ -5,17 +5,17 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.Baldes49;
+import pt.upt.ia.problema.Solitario;
 
 public class PesquisaProfundidade {
 	private Fronteira f;
-	private HashMap<Integer, EstadoProblema> fechados;
+	private HashMap<Integer, Estado> fechados;
 	private int contaNos;
 
-	public PesquisaProfundidade(ArrayList<EstadoProblema> i) {
-		fechados = new HashMap<Integer, EstadoProblema>();
+	public PesquisaProfundidade(ArrayList<Estado> i) {
+		fechados = new HashMap<Integer, Estado>();
 		f = new Fronteira(new Profundidade());
-		for (EstadoProblema e : i) {
+		for (Estado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -48,13 +48,15 @@ public class PesquisaProfundidade {
 						f.junta(nosuc);
 					}
 				}
+			} else {
+				System.out.println("Duplicado:\n"+no.getEstado()+"\n");
 			}
 			no = f.cabeca();
 			// estatistica
 			contaNos++;
-			if (contaNos % 10000 == 0) {
+			if (contaNos % 1000 == 0) {
 				System.out.println(no);
-				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
+				System.out.println(" nos expandidos: " + String.format("%1$,10d", contaNos) + " fronteira: "
 						+ String.format("%1$,10d", f.getContagem()));
 			}
 		}
@@ -62,12 +64,18 @@ public class PesquisaProfundidade {
 	}
 
 	public static void main(String[] args) {
-		// PesquisaProfundidade p = new PesquisaProfundidade(PuzzleOito.getIniciais());
-//		PesquisaProfundidade p = new PesquisaProfundidade(PuzzleSeis.getIniciais());
-		// PesquisaProfundidade p = new PesquisaProfundidade(MissCan.getIniciais());
+		// PesquisaProfundidade p = new
+		// PesquisaProfundidade(PuzzleOito.getIniciais());
+		// PesquisaProfundidade p = new
+		// PesquisaProfundidade(PuzzleSeis.getIniciais());
+		// PesquisaProfundidade p = new
+		// PesquisaProfundidade(MissCan.getIniciais());
 		// PesquisaProfundidade p = new PesquisaProfundidade(ND.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(Baldes49.getIniciais());
-//		 PesquisaProfundidade p = new PesquisaProfundidade(ND6.getIniciais());
+		// PesquisaProfundidade p = new
+		// PesquisaProfundidade(Baldes49.getIniciais());
+		// PesquisaProfundidade p = new PesquisaProfundidade(ND6.getIniciais());
+		PesquisaProfundidade p = new PesquisaProfundidade(Solitario.getIniciais());
+		Solitario.testa();
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

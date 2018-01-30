@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-import pt.upt.ia.problema.PuzzleOito;
+import pt.upt.ia.problema.Solitario;
 
 public class PesquisaAprofProgress {
 	private Fronteira f;
@@ -13,11 +13,11 @@ public class PesquisaAprofProgress {
 	private int contaNos;
 	private int maxima;
 
-	public PesquisaAprofProgress(int prof, ArrayList<EstadoProblema> i) {
+	public PesquisaAprofProgress(int prof, ArrayList<Estado> i) {
 		maxima = prof;
 		fechados = new HashMap<Integer, No>();
 		f = new Fronteira(new Profundidade());
-		for (EstadoProblema e : i) {
+		for (Estado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -35,12 +35,12 @@ public class PesquisaAprofProgress {
 		//
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
-			boolean salta = false;
-			if (fechados.containsKey(no.getEstado().getKey())) {
-				No n = fechados.get(no.getEstado().getKey());
-				if (n.getProfundidade() < no.getProfundidade())
-					salta = true;
-			}
+			boolean salta = fechados.containsKey(no.getEstado().getKey());
+//			if (fechados.containsKey(no.getEstado().getKey())) {
+//				No n = fechados.get(no.getEstado().getKey());
+//				if (n.getProfundidade() < no.getProfundidade())
+//					salta = true;
+//			}
 			if (!salta) {
 				ArrayList<No> suc = no.getSuc();
 				fechados.put(no.getEstado().getKey(), no);
@@ -78,7 +78,8 @@ public class PesquisaAprofProgress {
 		System.out.println("#########################################################");
 		while (no == null) {
 			limite++;
-			p = new PesquisaAprofProgress(limite, PuzzleOito.getIniciais());
+			p = new PesquisaAprofProgress(limite, Solitario.getIniciais());
+//			p = new PesquisaAprofProgress(limite, PuzzleOito.getIniciais());
 //			 p = new PesquisaAprofProgress( limite, PuzzleSeis.getIniciais());
 			// p = new PesquisaAprofProgress( limite, MissCan.getIniciais());
 			// p = new PesquisaAprofProgress( limite, ND.getIniciais());

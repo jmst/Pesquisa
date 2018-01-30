@@ -4,12 +4,12 @@ import java.util.List;
 
 public class No {
     private int profundidade;
-    private EstadoProblema estado;
+    private Estado estado;
     private double g;
     private double f;
     private No pai;
     
-    public No( EstadoProblema estado, No pai, double custo)
+    public No( Estado estado, No pai, double custo)
     {
         this.estado = estado;
         this.pai = pai;
@@ -47,7 +47,7 @@ public class No {
         return pai;
     }
     
-    public EstadoProblema getEstado() {
+    public Estado getEstado() {
         return estado;
     }
     
@@ -76,6 +76,10 @@ public class No {
     
     public String toString() {
         return "" + getEstado()+"   g= "+g()+"   h= "+h()+"   f= "+f()+"   prof= "+getProfundidade();
+    }
+    
+    public String repr() {
+        return "[" + getEstado()+"]";
     }
 
     public void escrevePais() {

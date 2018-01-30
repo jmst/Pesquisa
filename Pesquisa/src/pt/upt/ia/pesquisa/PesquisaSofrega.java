@@ -9,13 +9,13 @@ import pt.upt.ia.problema.PuzzleOito;
 
 public class PesquisaSofrega {
 	private Fronteira f;
-	private HashSet<EstadoProblema> fechados;
+	private HashSet<Estado> fechados;
 	private int contaNos;
 
-	public PesquisaSofrega(ArrayList<EstadoProblema> i) {
-		fechados = new HashSet<EstadoProblema>();
+	public PesquisaSofrega(ArrayList<Estado> i) {
+		fechados = new HashSet<Estado>();
 		f = new Fronteira(new Sofrega());
-		for (EstadoProblema e : i) {
+		for (Estado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
