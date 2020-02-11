@@ -49,14 +49,14 @@ public class PuzzleSeis extends Estado {
 				}
 		return h;
 	}
-
-	@Override
-	public int getKey() {
-		if (hash != Integer.MAX_VALUE)
-			return hash;
-		hash = hashCode();
-		return hash;
-	}
+//
+//	@Override
+//	public int getKey() {
+//		if (hash != Integer.MAX_VALUE)
+//			return hash;
+//		hash = hashCode();
+//		return hash;
+//	}
 
 	@Override
 	public int hashCode() {

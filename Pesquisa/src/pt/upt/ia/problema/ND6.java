@@ -48,13 +48,13 @@ public class ND6 extends Estado {
 		return vh;
 	}
 
-	@Override
-	public int getKey() {
-		if (hash != Integer.MAX_VALUE)
-			return hash;
-		hash = hashCode();
-		return hash;
-	}
+//	@Override
+//	public int getKey() {
+//		if (hash != Integer.MAX_VALUE)
+//			return hash;
+//		hash = hashCode();
+//		return hash;
+//	}
 
 	public ArrayList<Ramo> suc() {
 		int[] np;

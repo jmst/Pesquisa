@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pt.upt.ia.problema.PuzzleOito;
+import pt.upt.ia.problema.PuzzleCruz;
 
 // Pesquisa A* em grafo
 public class PesquisaAStar {
@@ -45,35 +45,37 @@ public class PesquisaAStar {
 				if (fechados.contains(nosuc.getEstado())) {
 					continue;
 				}
-				No copia = f.contemEstado( nosuc);
+				No copia = f.contemEstado(nosuc);
 				if (copia == null) {
 					f.junta(nosuc);
 					continue;
 				}
 				if (copia.f() > nosuc.f()) {
-					f.remove( copia);
-					f.junta( nosuc);
+					f.remove(copia);
+					f.junta(nosuc);
 				}
 			}
 			no = f.cabeca();
 			// estatistica
 			contaNos++;
-			if (contaNos % 10000 == 0) {
-				System.out.println(no);
-				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
-						+ String.format("%1$,10d", f.getContagem()));
-			}
+//			if (contaNos % 10000 == 0) {
+//				System.out.println(no);
+//				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
+//						+ String.format("%1$,10d", f.getContagem()));
+//			}
 		}
 		return null;
 	}
 
 	public static void main(String[] args) {
-		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
-//		 PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
-//		 PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(RatoQueijo.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
+		 PesquisaAStar p = new PesquisaAStar(PuzzleCruz.getIniciais());
+		// PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
+		// PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(ND.getIniciais());
-//		PesquisaAStar p = new PesquisaAStar(ND6.getIniciais());
-//		 PesquisaAStar p = new PesquisaAStar(Grafo.getIniciais());
+		// PesquisaAStar p = new PesquisaAStar(ND6.getIniciais());
+		// PesquisaAStar p = new PesquisaAStar(Grafo.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();
@@ -83,7 +85,7 @@ public class PesquisaAStar {
 		if (no != null) {
 			no.escrevePais();
 		} else {
-			System.out.println("Sem solução");
+			System.out.println("Sem soluÃ§Ã£o");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,10d", p.getContaNos()) + "    fronteira: "
 				+ String.format("%1$,10d", p.getFronteira().getContagem()));

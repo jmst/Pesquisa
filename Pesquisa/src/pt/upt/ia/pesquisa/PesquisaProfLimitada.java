@@ -2,20 +2,20 @@ package pt.upt.ia.pesquisa;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
-import pt.upt.ia.problema.PuzzleSeis;
+import pt.upt.ia.problema.Solitario;
 
 public class PesquisaProfLimitada {
 	private Fronteira f;
-	private HashMap<Integer, No> fechados;
+	private HashSet<Estado> fechados;
 	private int contaNos;
 	private int maxima;
 
-	public PesquisaProfLimitada(int prof, ArrayList<Estado> i) {
-		maxima = prof;
-		fechados = new HashMap<Integer, No>();
+	public PesquisaProfLimitada(int profMax, ArrayList<Estado> i) {
+		maxima = profMax;
+		fechados = new HashSet<Estado>();
 		f = new Fronteira(new Profundidade());
 		for (Estado e : i) {
 			f.junta(new No(e, null, 0));
@@ -35,49 +35,41 @@ public class PesquisaProfLimitada {
 		//
 		No no = f.cabeca();
 		while (no != null && !no.getEstado().goal()) {
-			boolean salta = false;
-			if (fechados.containsKey(no.getEstado().getKey())) {
-				No n = fechados.get(no.getEstado().getKey());
-				if (n.getProfundidade() < no.getProfundidade())
-					salta = true;
-			}
-			if (!salta) {
-				ArrayList<No> suc = no.getSuc();
-				fechados.put(no.getEstado().getKey(), no);
-				for (No nosuc : suc) {
-					if (nosuc.getEstado().goal()) {
-						return nosuc;
-					}
-					if (no.ciclo(nosuc)) {
-						continue;
-					}
-					No copia = f.contemEstado(nosuc);
-					if (copia == null) {
+			ArrayList<No> suc = no.getSuc();
+			fechados.add(no.getEstado());
+			for (No nosuc : suc) {
+				if (nosuc.getEstado().goal()) {
+					return nosuc;
+				}
+				if (!fechados.contains(nosuc.getEstado())) {
+					No existente = f.contemEstado(nosuc);
+					if (existente == null) {
 						f.junta(nosuc);
 					}
 				}
 			}
 			no = f.cabeca();
+
 			// estatistica
 			contaNos++;
-			if (contaNos % 10000 == 0) {
-				System.out.println(no);
-				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
-						+ String.format("%1$,10d", f.getContagem()));
-			}
+//			if (contaNos % 10000 == 0) {
+//				System.out.println(no);
+//				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
+//						+ String.format("%1$,10d", f.getContagem()));
+//			}
 		}
 		return null;
 	}
 
 	public static void main(String[] args) {
-		// PesquisaProfLimitada p = new PesquisaProfLimitada( 30,
-		// PuzzleOito.getIniciais());
-		 PesquisaProfLimitada p = new PesquisaProfLimitada( 16, PuzzleSeis.getIniciais());
-		// PesquisaProfLimitada p = new PesquisaProfLimitada( 15,
-		// MissCan.getIniciais());
-		// PesquisaProfLimitada p = new PesquisaProfLimitada( 24,
-		// ND.getIniciais());
-//		PesquisaProfLimitada p = new PesquisaProfLimitada(24, ND6.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 30, PuzzleOito.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 15, PuzzleSeis.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 15, MissCan.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada( 24, ND.getIniciais());
+		// PesquisaProfLimitada p = new PesquisaProfLimitada(24, ND6.getIniciais());
+//		 PesquisaProfLimitada p = new PesquisaProfLimitada(15,Baldes49.getIniciais());
+//		 PesquisaProfLimitada p = new PesquisaProfLimitada(7,Baldes34.getIniciais());
+		PesquisaProfLimitada p = new PesquisaProfLimitada(35, Solitario.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

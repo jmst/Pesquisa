@@ -58,11 +58,11 @@ public class PesquisaCustoUniforme {
 				no = f.cabeca();
 				// estatistica
 				contaNos++;
-				if (contaNos % 10000 == 0) {
-					System.out.println(no);
-					System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
-							+ String.format("%1$,10d", f.getContagem()));
-				}
+//				if (contaNos % 10000 == 0) {
+//					System.out.println(no);
+//					System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
+//							+ String.format("%1$,10d", f.getContagem()));
+//				}
 			}
 			return null;
 		}

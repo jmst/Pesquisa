@@ -18,16 +18,22 @@ public class ND extends Estado {
     }
     
     public double h() {
-        return 0;
+    	int h=0;
+        int[] pf = {2,2,0,1,1};
+        for (int i=0; i<5; i++) {
+        	if (p[i] != pf[i])
+        		h++;
+        }
+        return h;
     }
 
-	@Override
-	public int getKey() {
-		if (hash != Integer.MAX_VALUE)
-			return hash;
-		hash = hashCode();
-		return hash;
-	}
+//	@Override
+//	public int getKey() {
+//		if (hash != Integer.MAX_VALUE)
+//			return hash;
+//		hash = hashCode();
+//		return hash;
+//	}
     
     public ArrayList<Ramo> suc() {
         int[] np;
@@ -114,7 +120,7 @@ public class ND extends Estado {
     }
 
     public static void main( String[] args) {
-        int[] e = {1,1,0,2,2};
+        int[] e = {1,0,1,2,2};
         ND est = new ND(e);
         ArrayList<Ramo> s = est.suc();
         System.out.println("Inicial: " + est);

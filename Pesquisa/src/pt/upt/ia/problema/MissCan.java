@@ -100,15 +100,15 @@ public class MissCan extends Estado {
         return st;
     }
    
-    @Override
-	public int getKey() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (barcoE ? 1231 : 1237);
-		result = prime * result + nCanE;
-		result = prime * result + nMissE;
-		return result;
-	}
+//    @Override
+//	public int getKey() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + (barcoE ? 1231 : 1237);
+//		result = prime * result + nCanE;
+//		result = prime * result + nMissE;
+//		return result;
+//	}
 
 	@Override
 	public boolean equals(Object obj) {

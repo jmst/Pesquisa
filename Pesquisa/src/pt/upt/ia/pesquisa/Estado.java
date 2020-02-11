@@ -10,12 +10,6 @@ public abstract class Estado
     	return new ArrayList<Estado>();
     }
     
-    public String getChave() {
-        return "";
-    }
-    
-    public abstract int getKey();
-    
     public abstract boolean equals( Object p);
     
     public abstract int hashCode();

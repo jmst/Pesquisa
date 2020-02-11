@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pt.upt.ia.problema.ND;
+import pt.upt.ia.problema.Baldes34;
 
 public class PesquisaLargura {
 	private Fronteira f;
@@ -32,7 +32,7 @@ public class PesquisaLargura {
 
 	public No resolve() {
 		//
-		f.imprime();
+		// f.imprime();
 		No no = f.cabeca();
 		while (no != null) {
 			if (no.getEstado().goal()) {
@@ -52,28 +52,30 @@ public class PesquisaLargura {
 					f.junta(nosuc);
 				}
 			}
-			f.imprime();
+			// f.imprime();
 			no = f.cabeca();
 			// estatistica
 			contaNos++;
-			if (contaNos % 100 == 0) {
-				System.out.println(no);
-				System.out.println("        nos expandidos: " + String.format("%1$,10d", contaNos) + "    fronteira: "
-						+ String.format("%1$,5d", f.getContagem()));
-			}
+			// if (contaNos % 1000 == 0) {
+			// System.out.println(no);
+			// System.out.println(" nos expandidos: " + String.format("%1$,10d",
+			// contaNos) + " fronteira: "
+			// + String.format("%1$,5d", f.getContagem()));
+			// }
 		}
 		return null;
 	}
 
 	public static void main(String[] args) {
-		// PesquisaLargura p = new PesquisaLargura(Mochila.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(Baldes49.getIniciais());
+		 PesquisaLargura p = new PesquisaLargura(Baldes34.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(RatoQueijo.getIniciais());
-		PesquisaLargura p = new PesquisaLargura(ND.getIniciais());
+//		PesquisaLargura p = new PesquisaLargura(ND.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(ND6.getIniciais());
+		// PesquisaLargura p = new PesquisaLargura(Solitario.getIniciais());
 
 		Calendar c = Calendar.getInstance();
 		long t = c.getTimeInMillis();

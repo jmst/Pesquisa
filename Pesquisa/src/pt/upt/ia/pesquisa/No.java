@@ -8,6 +8,7 @@ public class No {
     private double g;
     private double f;
     private No pai;
+    private String oper;
     
     public No( Estado estado, No pai, double custo)
     {
@@ -15,7 +16,7 @@ public class No {
         this.pai = pai;
         if (pai == null) {
             g = custo;
-            profundidade = 0;
+            profundidade = 1;
         	f = g() + h();
         }
         else {
@@ -25,6 +26,13 @@ public class No {
             if (pai.f() > f)
             	f = pai.f();
         }
+        this.oper = "";
+    }
+    
+    public No( Estado estado, No pai, double custo, String oper)
+    {
+        this( estado, pai, custo);
+        this.oper = oper;
     }
     
     public int getProfundidade() {
@@ -55,7 +63,7 @@ public class No {
         ArrayList<No> suc = new ArrayList<No>();
         ArrayList<Ramo> s = estado.suc();
         for (Ramo r : s) {
-            No n = new No( r.getEstado(), this, r.getCusto());
+            No n = new No( r.getEstado(), this, r.getCusto(), r.getDescr());
             suc.add( n);
         }
         return suc;
@@ -66,7 +74,7 @@ public class No {
     		return true;
     	No p = pai;
     	while ( p != null) {
-        	if (n.getEstado().getKey() == p.getEstado().getKey()) {
+        	if (n.getEstado().equals( p.getEstado())) {
         		return true;
         	}
         	p = p.getPai();
@@ -75,7 +83,7 @@ public class No {
     }
     
     public String toString() {
-        return "" + getEstado()+"   g= "+g()+"   h= "+h()+"   f= "+f()+"   prof= "+getProfundidade();
+        return (oper!=null&&!oper.equals("")?("  "+oper):"")+ getEstado()+"   g= "+g()+"   h= "+h()+"   f= "+f()+"   prof= "+getProfundidade();
     }
     
     public String repr() {
