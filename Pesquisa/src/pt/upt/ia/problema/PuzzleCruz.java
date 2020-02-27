@@ -25,12 +25,11 @@ public class PuzzleCruz extends Estado {
 		}
 		tab[0][2] = 0;
 		tab[1][2] = 0;
-		tab[2][2] = 0;
+		tab[2][2] = 3;
 		tab[3][2] = 0;
 		tab[4][2] = 1;
 		tab[2][0] = 5;
 		tab[2][1] = 2;
-		tab[2][2] = 3;
 		tab[2][3] = 4;
 		tab[2][4] = 0;
 	}
