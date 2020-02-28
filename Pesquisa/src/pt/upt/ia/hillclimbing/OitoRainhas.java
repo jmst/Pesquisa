@@ -1,4 +1,4 @@
-package pt.up.ia.hillclimbing;
+package pt.upt.ia.hillclimbing;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

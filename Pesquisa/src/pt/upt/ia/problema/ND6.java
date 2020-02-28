@@ -2,10 +2,10 @@ package pt.upt.ia.problema;
 
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
 
-public class ND6 extends Estado {
+public class ND6 implements IEstado {
 	private int[] p;
 	private int hash = Integer.MAX_VALUE;
 
@@ -105,7 +105,7 @@ public class ND6 extends Estado {
 		return p[i];
 	}
 
-	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// hashCode, associa a cada objeto um nï¿½mero inteiro que se deseja
 	// distintivo
 	@Override
 	public int hashCode() {
@@ -116,11 +116,11 @@ public class ND6 extends Estado {
 	}
 
 	public boolean equals(Object o) {
-		if (o == null) // null não é igual
+		if (o == null) // null nï¿½o ï¿½ igual
 			return false;
-		if (o.getClass() != ND6.class) // classe diferente: não é igual
+		if (o.getClass() != ND6.class) // classe diferente: nï¿½o ï¿½ igual
 			return false;
-		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+		if (this == o) // tem a mesma referï¿½ncia de memï¿½ria: ï¿½ o mesmo objeto
 			return true;
 		ND6 oo = (ND6) o;
 		for (int i = 0; i < 7; i++)
@@ -129,8 +129,8 @@ public class ND6 extends Estado {
 		return true;
 	}
 
-	public static ArrayList<Estado> getIniciais() {
-		ArrayList<Estado> i = new ArrayList<Estado>();
+	public static ArrayList<IEstado> getIniciais() {
+		ArrayList<IEstado> i = new ArrayList<IEstado>();
 		int[] p = { 1, 1, 1, 0, 2, 2, 2 };
 		i.add(new ND6(p));
 		return i;

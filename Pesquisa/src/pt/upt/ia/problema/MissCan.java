@@ -1,11 +1,11 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
 
 
-public class MissCan extends Estado {
+public class MissCan implements IEstado {
     private int nMissE;
     private int nCanE;
     private boolean barcoE;
@@ -86,8 +86,8 @@ public class MissCan extends Estado {
         return nMissE == 0 && nCanE == 0;
     }
     
-    public static ArrayList<Estado> getIniciais() {
-        ArrayList<Estado> i = new ArrayList<Estado>();
+    public static ArrayList<IEstado> getIniciais() {
+        ArrayList<IEstado> i = new ArrayList<IEstado>();
         i.add( new MissCan( 3, 3, true));
         return i;
     }
@@ -128,7 +128,7 @@ public class MissCan extends Estado {
 		return true;
 	}
 
-	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// hashCode, associa a cada objeto um nï¿½mero inteiro que se deseja
 	// distintivo
 	@Override
 	public int hashCode() {

@@ -2,14 +2,14 @@ package pt.upt.ia.problema;
 
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
 
 //
 // dois baldes, de 9 e 4 litros
 // medir 6 litros no primeiro balde
 //
-public class Baldes49 extends Estado {
+public class Baldes49 implements IEstado {
 	private int b9;
 	private int b4;
 
@@ -59,8 +59,8 @@ public class Baldes49 extends Estado {
 		return b9 == 6;
 	}
 
-	public static ArrayList<Estado> getIniciais() {
-		ArrayList<Estado> i = new ArrayList<Estado>();
+	public static ArrayList<IEstado> getIniciais() {
+		ArrayList<IEstado> i = new ArrayList<IEstado>();
 		i.add(new Baldes49(0, 0));
 		return i;
 	}
@@ -86,7 +86,7 @@ public class Baldes49 extends Estado {
 		return true;
 	}
 
-	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// hashCode, associa a cada objeto um nï¿½mero inteiro que se deseja
 	// distintivo
 	@Override
 	public int hashCode() {

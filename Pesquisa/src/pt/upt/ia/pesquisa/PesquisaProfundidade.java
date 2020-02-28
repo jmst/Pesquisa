@@ -9,13 +9,13 @@ import pt.upt.ia.problema.Baldes34;
 
 public class PesquisaProfundidade {
 	private Fronteira f;
-	private HashSet<Estado> fechados;
+	private HashSet<IEstado> fechados;
 	private int contaNos;
 
-	public PesquisaProfundidade(ArrayList<Estado> i) {
-		fechados = new HashSet<Estado>();
+	public PesquisaProfundidade(ArrayList<IEstado> i) {
+		fechados = new HashSet<IEstado>();
 		f = new Fronteira(new Profundidade());
-		for (Estado e : i) {
+		for (IEstado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -78,7 +78,7 @@ public class PesquisaProfundidade {
 		if (no != null) {
 			no.escrevePais();
 		} else {
-			System.out.println("Sem solução");
+			System.out.println("Sem soluï¿½ï¿½o");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,4d", p.getContaNos()) + "    fronteira: "
 				+ String.format("%1$,4d", p.getFronteira().getContagem()));

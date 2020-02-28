@@ -2,10 +2,10 @@ package pt.upt.ia.problema;
 
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
 
-public class Solitario extends Estado {
+public class Solitario implements IEstado {
 	private int tab[][];
 	private int hash = Integer.MAX_VALUE;
 	private static final int DIM = 6;
@@ -29,8 +29,8 @@ public class Solitario extends Estado {
 		tab[med][med] = 0;
 	}
 
-	public static ArrayList<Estado> getIniciais() {
-		ArrayList<Estado> lista = new ArrayList<Estado>();
+	public static ArrayList<IEstado> getIniciais() {
+		ArrayList<IEstado> lista = new ArrayList<IEstado>();
 		lista.add(new Solitario());
 		return lista;
 	}
@@ -182,11 +182,11 @@ public class Solitario extends Estado {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) // null não é igual
+		if (o == null) // null nï¿½o ï¿½ igual
 			return false;
-		if (o.getClass() != Solitario.class) // classe diferente: não é igual
+		if (o.getClass() != Solitario.class) // classe diferente: nï¿½o ï¿½ igual
 			return false;
-		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+		if (this == o) // tem a mesma referï¿½ncia de memï¿½ria: ï¿½ o mesmo objeto
 			return true;
 		Solitario oo = (Solitario) o;
 		for (int i = 0; i < DIM; i++)
@@ -200,7 +200,7 @@ public class Solitario extends Estado {
 		return tab[i][j];
 	}
 
-	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// hashCode, associa a cada objeto um nï¿½mero inteiro que se deseja
 	// distintivo
 	@Override
 	public int hashCode() {

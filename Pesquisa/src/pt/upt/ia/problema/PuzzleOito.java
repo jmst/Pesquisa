@@ -1,10 +1,9 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
-public class PuzzleOito extends Estado {
+
+public class PuzzleOito implements IEstado {
     private int tab[][];
     private int hash = Integer.MAX_VALUE;
 
@@ -75,8 +74,8 @@ public class PuzzleOito extends Estado {
 //        tab[2][2] = 3;
     }
 
-    public static ArrayList<Estado> getIniciais() {
-        ArrayList<Estado> lista = new ArrayList<Estado>();
+    public static ArrayList<IEstado> getIniciais() {
+        ArrayList<IEstado> lista = new ArrayList<IEstado>();
         lista.add(new PuzzleOito());
         return lista;
     }
@@ -219,11 +218,11 @@ public class PuzzleOito extends Estado {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) // null não é igual
+		if (o == null) // null nï¿½o ï¿½ igual
 			return false;
-		if (o.getClass() != PuzzleOito.class) // classe diferente: não é igual
+		if (o.getClass() != PuzzleOito.class) // classe diferente: nï¿½o ï¿½ igual
 			return false;
-		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+		if (this == o) // tem a mesma referï¿½ncia de memï¿½ria: ï¿½ o mesmo objeto
 			return true;
 		PuzzleOito oo = (PuzzleOito) o;
 		for (int i=0; i<3; i++)
@@ -237,7 +236,7 @@ public class PuzzleOito extends Estado {
     	return tab[i][j];
     }
     
-	// hashCode, associa a cada objeto um número inteiro que se deseja
+	// hashCode, associa a cada objeto um nï¿½mero inteiro que se deseja
 	// distintivo
 	@Override
 	public int hashCode() {

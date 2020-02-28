@@ -4,13 +4,13 @@ import java.util.List;
 
 public class No {
     private int profundidade;
-    private Estado estado;
+    private IEstado estado;
     private double g;
     private double f;
     private No pai;
     private String oper;
     
-    public No( Estado estado, No pai, double custo)
+    public No( IEstado estado, No pai, double custo)
     {
         this.estado = estado;
         this.pai = pai;
@@ -29,7 +29,7 @@ public class No {
         this.oper = "";
     }
     
-    public No( Estado estado, No pai, double custo, String oper)
+    public No( IEstado estado, No pai, double custo, String oper)
     {
         this( estado, pai, custo);
         this.oper = oper;
@@ -55,7 +55,7 @@ public class No {
         return pai;
     }
     
-    public Estado getEstado() {
+    public IEstado getEstado() {
         return estado;
     }
     

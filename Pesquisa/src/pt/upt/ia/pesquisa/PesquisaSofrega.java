@@ -9,13 +9,13 @@ import pt.upt.ia.problema.ND;
 
 public class PesquisaSofrega {
 	private Fronteira f;
-	private HashSet<Estado> fechados;
+	private HashSet<IEstado> fechados;
 	private int contaNos;
 
-	public PesquisaSofrega(ArrayList<Estado> i) {
-		fechados = new HashSet<Estado>();
+	public PesquisaSofrega(ArrayList<IEstado> i) {
+		fechados = new HashSet<IEstado>();
 		f = new Fronteira(new Sofrega());
-		for (Estado e : i) {
+		for (IEstado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -43,11 +43,11 @@ public class PesquisaSofrega {
 					if (no.ciclo(nosuc)) {
 						continue;
 					}
-					// já está na lista de nós fechados?
+					// jï¿½ estï¿½ na lista de nï¿½s fechados?
 					if (fechados.contains(nosuc.getEstado())) {
 						continue;
 					}
-					// já está na lista fronteira?
+					// jï¿½ estï¿½ na lista fronteira?
 					No copia = f.contemEstado(nosuc);
 					if (copia == null) {
 						f.junta(nosuc);
@@ -84,7 +84,7 @@ public class PesquisaSofrega {
 		if (no != null) {
 			no.escrevePais();
 		} else {
-			System.out.println("Sem solução");
+			System.out.println("Sem soluï¿½ï¿½o");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,10d", p.getContaNos()) + "    fronteira: "
 				+ String.format("%1$,10d", p.getFronteira().getContagem()));

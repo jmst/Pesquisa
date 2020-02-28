@@ -7,18 +7,19 @@ import java.util.List;
 import java.util.Set;
 
 import pt.upt.ia.problema.PuzzleCruz12;
+import pt.upt.ia.problema.RatoQueijo;
 
 // Pesquisa A* em grafo
 public class PesquisaAStar {
 
 	private Fronteira f;
-	private Set<Estado> fechados;
+	private Set<IEstado> fechados;
 	private int contaNos;
 
-	public PesquisaAStar(ArrayList<Estado> i) {
-		fechados = new HashSet<Estado>();
+	public PesquisaAStar(ArrayList<IEstado> i) {
+		fechados = new HashSet<IEstado>();
 		f = new Fronteira(new AStar());
-		for (Estado e : i) {
+		for (IEstado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -72,7 +73,8 @@ public class PesquisaAStar {
 //		 PesquisaAStar p = new PesquisaAStar(RatoQueijo.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(PuzzleCruz.getIniciais());
-		 PesquisaAStar p = new PesquisaAStar(PuzzleCruz12.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(PuzzleCruz12.getIniciais());
+		 PesquisaAStar p = new PesquisaAStar(RatoQueijo.getIniciais());
 		// PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
 		// PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(ND.getIniciais());

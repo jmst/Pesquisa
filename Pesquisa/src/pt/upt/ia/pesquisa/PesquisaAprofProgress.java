@@ -9,15 +9,15 @@ import pt.upt.ia.problema.MissCan;
 
 public class PesquisaAprofProgress {
 	private Fronteira f;
-	private HashSet<Estado> fechados;
+	private HashSet<IEstado> fechados;
 	private int contaNos;
 	private int maxima;
 
-	public PesquisaAprofProgress(int prof, ArrayList<Estado> i) {
+	public PesquisaAprofProgress(int prof, ArrayList<IEstado> i) {
 		maxima = prof;
-		fechados = new HashSet<Estado>();
+		fechados = new HashSet<IEstado>();
 		f = new Fronteira(new Profundidade());
-		for (Estado e : i) {
+		for (IEstado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -86,7 +86,7 @@ public class PesquisaAprofProgress {
 		if (no != null) {
 			no.escrevePais();
 		} else {
-			System.out.println("Sem solução");
+			System.out.println("Sem soluï¿½ï¿½o");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,10d", p.getContaNos()) + "    fronteira: "
 				+ String.format("%1$,10d", p.getFronteira().getContagem()) + "      limite: " + limite);

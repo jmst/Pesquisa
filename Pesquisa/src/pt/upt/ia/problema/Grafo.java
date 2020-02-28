@@ -1,11 +1,11 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
 
 
-public class Grafo extends Estado {
+public class Grafo implements IEstado {
 
 	public static int[][] t = {	
 //         1           5             10             15             20             25             30
@@ -62,9 +62,9 @@ public class Grafo extends Estado {
     public boolean equals( Object o) {
     	if (o == null)
     		return false;
-		if (o.getClass() != Grafo.class) // classe diferente: não é igual
+		if (o.getClass() != Grafo.class) // classe diferente: nï¿½o ï¿½ igual
 			return false;
-		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+		if (this == o) // tem a mesma referï¿½ncia de memï¿½ria: ï¿½ o mesmo objeto
 			return true;
 		Grafo g = (Grafo) o;
     	return numero == g.getKey();
@@ -84,8 +84,8 @@ public class Grafo extends Estado {
     	return numero == 29;		// ESTADO FINAL
     }
     
-    public static ArrayList<Estado> getIniciais() {
-    	ArrayList<Estado> i = new ArrayList<Estado>();
+    public static ArrayList<IEstado> getIniciais() {
+    	ArrayList<IEstado> i = new ArrayList<IEstado>();
     	i.add( new Grafo(1));		// ESTADO INICIAL
     	return i;
     }

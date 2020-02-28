@@ -1,23 +1,23 @@
 package pt.upt.ia.pesquisa;
 
 public class Ramo {
-	private Estado estado;
+	private IEstado estado;
 	private double custo;
 	private String descr;
 	
-	public Ramo( Estado estado, double custo) {
+	public Ramo( IEstado estado, double custo) {
 		this.estado = estado;
 		this.custo = custo;
 		this.descr = "";
 	}
 	
-	public Ramo( Estado estado, double custo, String descr) {
+	public Ramo( IEstado estado, double custo, String descr) {
 		this.estado = estado;
 		this.custo = custo;
 		this.descr = descr;
 	}
 	
-	public Estado getEstado() {
+	public IEstado getEstado() {
 		return estado;
 	}
 	

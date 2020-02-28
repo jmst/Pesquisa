@@ -9,15 +9,15 @@ import pt.upt.ia.problema.Solitario;
 
 public class PesquisaProfLimitada {
 	private Fronteira f;
-	private HashSet<Estado> fechados;
+	private HashSet<IEstado> fechados;
 	private int contaNos;
 	private int maxima;
 
-	public PesquisaProfLimitada(int profMax, ArrayList<Estado> i) {
+	public PesquisaProfLimitada(int profMax, ArrayList<IEstado> i) {
 		maxima = profMax;
-		fechados = new HashSet<Estado>();
+		fechados = new HashSet<IEstado>();
 		f = new Fronteira(new Profundidade());
-		for (Estado e : i) {
+		for (IEstado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -79,7 +79,7 @@ public class PesquisaProfLimitada {
 		if (no != null) {
 			no.escrevePais();
 		} else {
-			System.out.println("Sem solução");
+			System.out.println("Sem soluï¿½ï¿½o");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,10d", p.getContaNos()) + "    fronteira: "
 				+ String.format("%1$,10d", p.getFronteira().getContagem()));

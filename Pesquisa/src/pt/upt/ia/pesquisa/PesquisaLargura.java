@@ -10,13 +10,13 @@ import pt.upt.ia.problema.Baldes34;
 
 public class PesquisaLargura {
 	private Fronteira f;
-	private Set<Estado> fechados;
+	private Set<IEstado> fechados;
 	private int contaNos;
 
-	public PesquisaLargura(ArrayList<Estado> i) {
-		fechados = new HashSet<Estado>();
+	public PesquisaLargura(ArrayList<IEstado> i) {
+		fechados = new HashSet<IEstado>();
 		f = new Fronteira(new Largura());
-		for (Estado e : i) {
+		for (IEstado e : i) {
 			f.junta(new No(e, null, 0));
 		}
 		contaNos = 0;
@@ -41,14 +41,14 @@ public class PesquisaLargura {
 			ArrayList<No> suc = no.getSuc();
 			fechados.add(no.getEstado());
 			for (No nosuc : suc) {
-				// já está na lista de nós fechados?
+				// jï¿½ estï¿½ na lista de nï¿½s fechados?
 				if (fechados.contains(nosuc.getEstado())) {
 					continue;
 				}
-				// já está na lista fronteira?
+				// jï¿½ estï¿½ na lista fronteira?
 				No copia = f.contemEstado(nosuc);
 				if (copia == null) {
-					// junta nó à lista fronteira
+					// junta nï¿½ ï¿½ lista fronteira
 					f.junta(nosuc);
 				}
 			}
@@ -85,7 +85,7 @@ public class PesquisaLargura {
 		if (no != null) {
 			no.escrevePais();
 		} else {
-			System.out.println("Sem solução");
+			System.out.println("Sem soluï¿½ï¿½o");
 		}
 		System.out.println("        nos expandidos: " + String.format("%1$,4d", p.getContaNos()) + "    fronteira: "
 				+ String.format("%1$,4d", p.getFronteira().getContagem()));

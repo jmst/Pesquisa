@@ -1,9 +1,10 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
-public class PuzzleSeis extends Estado {
+
+public class PuzzleSeis implements IEstado {
     private int hash = Integer.MAX_VALUE;
 	
 // prof 7
@@ -23,8 +24,8 @@ public class PuzzleSeis extends Estado {
 	public PuzzleSeis() {
 	}
 
-	public static ArrayList<Estado> getIniciais() {
-		ArrayList<Estado> lista = new ArrayList<Estado>();
+	public static ArrayList<IEstado> getIniciais() {
+		ArrayList<IEstado> lista = new ArrayList<IEstado>();
 		lista.add(new PuzzleSeis());
     	return lista;
     }
@@ -70,11 +71,11 @@ public class PuzzleSeis extends Estado {
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null) // null não é igual
+		if (o == null) // null nï¿½o ï¿½ igual
 			return false;
-		if (o.getClass() != PuzzleSeis.class) // classe diferente: não é igual
+		if (o.getClass() != PuzzleSeis.class) // classe diferente: nï¿½o ï¿½ igual
 			return false;
-		if (this == o) // tem a mesma referência de memória: é o mesmo objeto
+		if (this == o) // tem a mesma referï¿½ncia de memï¿½ria: ï¿½ o mesmo objeto
 			return true;
 		PuzzleSeis oo = (PuzzleSeis) o;
 		for (int i=0; i<2; i++)

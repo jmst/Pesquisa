@@ -2,10 +2,10 @@ package pt.upt.ia.problema;
 
 import java.util.ArrayList;
 
-import pt.upt.ia.pesquisa.Estado;
+import pt.upt.ia.pesquisa.IEstado;
 import pt.upt.ia.pesquisa.Ramo;
 
-public class PuzzleCruz extends Estado {
+public class PuzzleCruz implements IEstado {
 	private int tab[][];
 
 	public PuzzleCruz(int[][] novo) {
@@ -34,8 +34,8 @@ public class PuzzleCruz extends Estado {
 		tab[2][4] = 0;
 	}
 
-	public static ArrayList<Estado> getIniciais() {
-		ArrayList<Estado> lista = new ArrayList<Estado>();
+	public static ArrayList<IEstado> getIniciais() {
+		ArrayList<IEstado> lista = new ArrayList<IEstado>();
 		lista.add(new PuzzleCruz());
 		return lista;
 	}
