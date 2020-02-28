@@ -19,15 +19,15 @@ public class PuzzleOito implements IEstado {
         tab = new int[3][3];
 
 // prof 6
-        tab[0][0] = 1;
-        tab[0][1] = 2;
-        tab[0][2] = 3;
-        tab[1][0] = 5;
-        tab[1][1] = 6;
-        tab[1][2] = 0;
-        tab[2][0] = 4;
-        tab[2][1] = 7;
-        tab[2][2] = 8;
+//        tab[0][0] = 1;
+//        tab[0][1] = 2;
+//        tab[0][2] = 3;
+//        tab[1][0] = 5;
+//        tab[1][1] = 6;
+//        tab[1][2] = 0;
+//        tab[2][0] = 4;
+//        tab[2][1] = 7;
+//        tab[2][2] = 8;
 
 // prof 19
 //        tab[0][0] = 2;
@@ -63,15 +63,15 @@ public class PuzzleOito implements IEstado {
 //        tab[2][2] = 3;
 
 // prof 29
-//        tab[0][0] = 8;
-//        tab[0][1] = 6;
-//        tab[0][2] = 7;
-//        tab[1][0] = 4;
-//        tab[1][1] = 0;
-//        tab[1][2] = 5;
-//        tab[2][0] = 2;
-//        tab[2][1] = 1;
-//        tab[2][2] = 3;
+        tab[0][0] = 8;
+        tab[0][1] = 6;
+        tab[0][2] = 7;
+        tab[1][0] = 4;
+        tab[1][1] = 0;
+        tab[1][2] = 5;
+        tab[2][0] = 2;
+        tab[2][1] = 1;
+        tab[2][2] = 3;
     }
 
     public static ArrayList<IEstado> getIniciais() {

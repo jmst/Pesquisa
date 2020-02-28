@@ -6,8 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pt.upt.ia.problema.PuzzleCruz12;
-import pt.upt.ia.problema.RatoQueijo;
+import pt.upt.ia.problema.PuzzleOito;
 
 // Pesquisa A* em grafo
 public class PesquisaAStar {
@@ -71,10 +70,10 @@ public class PesquisaAStar {
 
 	public static void main(String[] args) {
 //		 PesquisaAStar p = new PesquisaAStar(RatoQueijo.getIniciais());
-//		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
+		 PesquisaAStar p = new PesquisaAStar(PuzzleOito.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(PuzzleCruz.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(PuzzleCruz12.getIniciais());
-		 PesquisaAStar p = new PesquisaAStar(RatoQueijo.getIniciais());
+//		 PesquisaAStar p = new PesquisaAStar(RatoQueijo.getIniciais());
 		// PesquisaAStar p = new PesquisaAStar(PuzzleSeis.getIniciais());
 		// PesquisaAStar p = new PesquisaAStar(MissCan.getIniciais());
 //		 PesquisaAStar p = new PesquisaAStar(ND.getIniciais());

@@ -112,7 +112,7 @@ public class PuzzleCruz12 implements IEstado {
 					return false;
 		return true;
 	}
-
+	
 	@Override
 	public double h() {
 		double h = 0;
