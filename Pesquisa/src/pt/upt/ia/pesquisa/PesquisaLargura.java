@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pt.upt.ia.problema.Baldes34;
+import pt.upt.ia.problema.MissCan;
 
 public class PesquisaLargura {
 	private Fronteira f;
@@ -39,14 +39,14 @@ public class PesquisaLargura {
 				return no;
 			}
 			ArrayList<No> suc = no.getSuc();
-			fechados.add(no.getEstado());
+//			fechados.add(no.getEstado());
 			for (No nosuc : suc) {
 				// j� est� na lista de n�s fechados?
-				if (fechados.contains(nosuc.getEstado())) {
-					continue;
-				}
+//				if (fechados.contains(nosuc.getEstado())) {
+//					continue;
+//				}
 				// j� est� na lista fronteira?
-				No copia = f.contemEstado(nosuc);
+				No copia = null; // f.contemEstado(nosuc);
 				if (copia == null) {
 					// junta n� � lista fronteira
 					f.junta(nosuc);
@@ -68,9 +68,9 @@ public class PesquisaLargura {
 
 	public static void main(String[] args) {
 		// PesquisaLargura p = new PesquisaLargura(Baldes49.getIniciais());
-		 PesquisaLargura p = new PesquisaLargura(Baldes34.getIniciais());
-		// PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
-		// PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
+//		 PesquisaLargura p = new PesquisaLargura(Baldes34.getIniciais());
+		 PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
+//		 PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(RatoQueijo.getIniciais());
 //		PesquisaLargura p = new PesquisaLargura(ND.getIniciais());

@@ -22,7 +22,7 @@ public interface IEstado
     /*
      * retorna uma coleção com os estados sucessores, e o custo de transição de cada um
      */
-    ArrayList<Ramo> suc();
+    ArrayList<Acao> suc();
     /*
      * retorna uma coleção com o(s) estado(s) inicial(is)
      */

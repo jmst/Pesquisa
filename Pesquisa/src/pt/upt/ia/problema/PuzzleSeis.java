@@ -1,24 +1,21 @@
 package pt.upt.ia.problema;
+
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 public class PuzzleSeis implements IEstado {
-    private int hash = Integer.MAX_VALUE;
-	
-// prof 7
-//	private int tab[][] = {{1,0,0,0,0,6},{2,3,0,0,4,5}};
-	
-// prof 9	
-	private int tab[][] = {{1,4,0,5,0,6},{0,0,2,3,0,0}};
+	private int hash = Integer.MAX_VALUE;
+	private static final int NPECAS = 9;
 
-	public PuzzleSeis(int[][] novo) {
-		tab = new int[2][6];
-		for (int i=0; i<2; i++)
-			for (int j=0; j<6; j++) {
-				tab[i][j] = novo[i][j];
-			}
+	private int tab[] = { 1, 3, 6, 2, 7, 4, 5, 9, 8 };
+
+	public PuzzleSeis(int[] novo) {
+		tab = new int[NPECAS];
+		for (int j = 0; j < NPECAS; j++) {
+			tab[j] = novo[j];
+		}
 	}
 
 	public PuzzleSeis() {
@@ -27,45 +24,43 @@ public class PuzzleSeis implements IEstado {
 	public static ArrayList<IEstado> getIniciais() {
 		ArrayList<IEstado> lista = new ArrayList<IEstado>();
 		lista.add(new PuzzleSeis());
-    	return lista;
-    }
+		return lista;
+	}
 
 	@Override
 	public boolean goal() {
-		boolean res = true;
-		for (int i=0; i<6; i++)
-			if (tab[1][i] != i+1)
-				res = false;
-		return res;
+		for (int i = 0; i < NPECAS-1; i++)
+			if (tab[i] > tab[i + 1])
+				return false;
+		return true;
 	}
+
+//	@Override
+//	public double h() {
+//		int h = 0;
+//		for (int c = 0; c < NPECAS-1; c++)
+//			if (tab[c] > tab[c + 1]) {
+//				h++;
+//			}
+//		return h;
+//	}
 
 	@Override
 	public double h() {
-		double h = 0;
-		for (int l=0; l<2; l++)
-			for (int c =0; c<6; c++)
-				if ( tab[l][c] > 0) {
-					int dif = Math.abs(c+1-tab[l][c]);
-					h += dif + 1 - l;
-				}
-		return h;
+		int h = 0;
+		for (int c = 0; c < NPECAS-1; c++)
+			if (tab[c] > tab[c + 1]) {
+				h++;
+			}
+		return Math.floor(h / 2.0 + 0.6);
 	}
-//
-//	@Override
-//	public int getKey() {
-//		if (hash != Integer.MAX_VALUE)
-//			return hash;
-//		hash = hashCode();
-//		return hash;
-//	}
 
 	@Override
 	public int hashCode() {
 		int result = 0;
-		for (int l=0; l<2; l++)
-			for (int c=0; c<6; c++) {
-				result = result * 7 + tab[l][c];
-			}
+		for (int c = 0; c < NPECAS; c++) {
+			result = result * 7 + tab[c];
+		}
 		return result;
 	}
 
@@ -78,95 +73,51 @@ public class PuzzleSeis implements IEstado {
 		if (this == o) // tem a mesma refer�ncia de mem�ria: � o mesmo objeto
 			return true;
 		PuzzleSeis oo = (PuzzleSeis) o;
-		for (int i=0; i<2; i++)
-			for (int j=0; j<6; j++)
-			if (tab[i][j] != oo.get(i,j))
+		for (int j = 0; j < NPECAS; j++)
+			if (tab[j] != oo.get(j))
 				return false;
 		return true;
 	}
 
-    public int get(int i, int j) {
-    	return tab[i][j];
-    }
+	public int get(int j) {
+		return tab[j];
+	}
 
 	@Override
-	public ArrayList<Ramo> suc() {
-		ArrayList<Ramo> s = new ArrayList<Ramo>();
-		for (int l=0; l<2; l++)
-			for (int c =0; c<6; c++) {
-				if ( tab[l][c] == 0) {
-					if (l==1 && tab[1][c] == 0 && tab[0][c] > 0) {		// baixo
-						int[][] novo = new int[2][6];
-						for (int i=0; i<2; i++)
-							for (int j=0; j<6; j++) {
-								novo[i][j] = tab[i][j];
-							}
-						novo[1][c] = novo[0][c];
-						novo[0][c] = 0;
-						PuzzleSeis novoEstado = new PuzzleSeis(novo);
-						s.add( new Ramo(novoEstado,1));
-					}
-					if (l==0 && tab[0][c] == 0 && tab[1][c] > 0) {		// cima
-						int[][] novo = new int[2][6];
-						for (int i=0; i<2; i++)
-							for (int j=0; j<6; j++) {
-								novo[i][j] = tab[i][j];
-							}
-						novo[0][c] = novo[1][c];
-						novo[1][c] = 0;
-						PuzzleSeis novoEstado = new PuzzleSeis(novo);
-						s.add( new Ramo(novoEstado,1));
-					}
-					if (c>0 && tab[l][c] == 0 && tab[l][c-1] > 0) {		// esquerda
-						int[][] novo = new int[2][6];
-						for (int i=0; i<2; i++)
-							for (int j=0; j<6; j++) {
-								novo[i][j] = tab[i][j];
-							}
-						novo[l][c] = novo[l][c-1];
-						novo[l][c-1] = 0;
-						PuzzleSeis novoEstado = new PuzzleSeis(novo);
-						s.add( new Ramo(novoEstado,1));
-					}
-					if (c<5 && tab[l][c] == 0 && tab[l][c+1] > 0) {		// direita
-						int[][] novo = new int[2][6];
-						for (int i=0; i<2; i++)
-							for (int j=0; j<6; j++) {
-								novo[i][j] = tab[i][j];
-							}
-						novo[l][c] = novo[l][c+1];
-						novo[l][c+1] = 0;
-						PuzzleSeis novoEstado = new PuzzleSeis(novo);
-						s.add( new Ramo(novoEstado,1));
-					}
+	public ArrayList<Acao> suc() {
+		ArrayList<Acao> s = new ArrayList<Acao>();
+		for (int i = 0; i < NPECAS-1; i++) {
+			for (int j = i + 1; j < NPECAS; j++) {
+				int[] novo = new int[NPECAS];
+				for (int k = 0; k < NPECAS; k++) {
+					novo[k] = tab[k];
 				}
+				int temp = novo[i];
+				novo[i] = novo[j];
+				novo[j] = temp;
+				PuzzleSeis novoEstado = new PuzzleSeis(novo);
+				s.add(new Acao(novoEstado, 1));
 			}
+		}
 		return s;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n");
-		for (int l=0; l<2; l++) {
-			for (int c=0; c<6; c++)
-				if (tab[l][c] > 0) {		// c � a coluna da rainha da linha l
-					sb.append(" "+tab[l][c]);
-				}
-				else
-					sb.append(" .");
-			sb.append("\n");
+		for (int c = 0; c < NPECAS; c++) {
+			sb.append(" " + tab[c]);
 		}
-		return new String( sb);
+		sb.append("\n");
+		return new String(sb);
 	}
 
-//	public static void main( String[] args) {
-////	    int[][] in = {{1,0,0,0,0,6},{3,0,2,4,5,0}};
-//	    int[][] in = {{1,0,0,0,0,6},{2,3,0,0,4,5}};
-//	    PuzzleSeis ps = new PuzzleSeis( in);
-//	    ArrayList<Ramo> s = ps.suc();
-//	    for (Ramo ss : s) {
-//	        System.out.println( ss.getEstado() + "  " + ss.getEstado().h());
-//	   }
-//    }
+	public static void main(String[] args) {
+		PuzzleSeis ps = new PuzzleSeis();
+		ArrayList<Acao> s = ps.suc();
+		for (Acao ss : s) {
+			System.out.println(ss.getEstado() + "  " + ss.getEstado().h());
+		}
+	}
 
 }

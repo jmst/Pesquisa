@@ -3,7 +3,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 public class Solitario implements IEstado {
 	private int tab[][];
@@ -48,8 +48,8 @@ public class Solitario implements IEstado {
 	}
 
 	@Override
-	public ArrayList<Ramo> suc() {
-		ArrayList<Ramo> s = new ArrayList<Ramo>();
+	public ArrayList<Acao> suc() {
+		ArrayList<Acao> s = new ArrayList<Acao>();
 		int[][] novo;
 		for (int l = 0; l < DIM; l++) {
 			for (int c = 0; c < DIM - 2; c++) {
@@ -59,7 +59,7 @@ public class Solitario implements IEstado {
 					novo[l][c + 1] = 0;
 					novo[l][c + 2] = 1;
 					Solitario novoEstado = new Solitario(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 				if (tab[l][c] == 0 && tab[l][c + 1] == 1 && tab[l][c + 2] == 1) {
 					novo = copia(tab);
@@ -67,7 +67,7 @@ public class Solitario implements IEstado {
 					novo[l][c + 1] = 0;
 					novo[l][c + 2] = 0;
 					Solitario novoEstado = new Solitario(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 			}
 		}
@@ -79,7 +79,7 @@ public class Solitario implements IEstado {
 					novo[l + 1][c] = 0;
 					novo[l + 2][c] = 1;
 					Solitario novoEstado = new Solitario(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 				if (tab[l][c] == 0 && tab[l + 1][c] == 1 && tab[l + 2][c] == 1) {
 					novo = copia(tab);
@@ -87,7 +87,7 @@ public class Solitario implements IEstado {
 					novo[l + 1][c] = 0;
 					novo[l + 2][c] = 0;
 					Solitario novoEstado = new Solitario(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 			}
 		}
@@ -165,9 +165,9 @@ public class Solitario implements IEstado {
 	public static void testa() {
 		Solitario p = new Solitario();
 		System.out.println("====================\n" + p);
-		ArrayList<Ramo> suc = p.suc();
+		ArrayList<Acao> suc = p.suc();
 		System.out.println("No. Sucessores: " + suc.size());
-		for (Ramo r : suc) {
+		for (Acao r : suc) {
 			System.out.println(r.getEstado());
 		}
 	}
@@ -224,8 +224,8 @@ public class Solitario implements IEstado {
 		t[2][3] = 0;
 		t[2][2] = 0;
 		Solitario s = new Solitario(t);
-		ArrayList<Ramo> suc = s.suc();
-		for (Ramo seg : suc) {
+		ArrayList<Acao> suc = s.suc();
+		for (Acao seg : suc) {
 			System.out.println("" + seg.getEstado());
 		}
 	}

@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 
-import pt.upt.ia.problema.ND;
+import pt.upt.ia.problema.PuzzleOito;
 
 public class PesquisaSofrega {
 	private Fronteira f;
@@ -69,10 +69,10 @@ public class PesquisaSofrega {
 
 	public static void main(String[] args) {
 		// PesquisaSofrega p = new PesquisaSofrega(RatoQueijo.getIniciais());
-//		PesquisaSofrega p = new PesquisaSofrega(PuzzleOito.getIniciais());
+		PesquisaSofrega p = new PesquisaSofrega(PuzzleOito.getIniciais());
 		// PesquisaSofrega p = new PesquisaSofrega(PuzzleSeis.getIniciais());
 		// PesquisaSofrega p = new PesquisaSofrega(MissCan.getIniciais());
-		 PesquisaSofrega p = new PesquisaSofrega(ND.getIniciais());
+//		 PesquisaSofrega p = new PesquisaSofrega(ND.getIniciais());
 		// PesquisaSofrega p = new PesquisaSofrega(ND6.getIniciais());
 		// PesquisaSofrega p = new PesquisaSofrega(Baldes49.getIniciais());
 

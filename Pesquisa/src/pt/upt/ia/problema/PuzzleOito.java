@@ -1,7 +1,7 @@
 package pt.upt.ia.problema;
 import java.util.ArrayList;
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 public class PuzzleOito implements IEstado {
     private int tab[][];
@@ -30,15 +30,15 @@ public class PuzzleOito implements IEstado {
 //        tab[2][2] = 8;
 
 // prof 19
-//        tab[0][0] = 2;
-//        tab[0][1] = 3;
-//        tab[0][2] = 7;
-//        tab[1][0] = 1;
-//        tab[1][1] = 4;
-//        tab[1][2] = 8;
-//        tab[2][0] = 0;
-//        tab[2][1] = 5;
-//        tab[2][2] = 6;
+        tab[0][0] = 2;
+        tab[0][1] = 3;
+        tab[0][2] = 7;
+        tab[1][0] = 1;
+        tab[1][1] = 4;
+        tab[1][2] = 8;
+        tab[2][0] = 0;
+        tab[2][1] = 5;
+        tab[2][2] = 6;
 
 // prof 21
 //        tab[0][0] = 7;
@@ -63,15 +63,15 @@ public class PuzzleOito implements IEstado {
 //        tab[2][2] = 3;
 
 // prof 29
-        tab[0][0] = 8;
-        tab[0][1] = 6;
-        tab[0][2] = 7;
-        tab[1][0] = 4;
-        tab[1][1] = 0;
-        tab[1][2] = 5;
-        tab[2][0] = 2;
-        tab[2][1] = 1;
-        tab[2][2] = 3;
+//        tab[0][0] = 8;
+//        tab[0][1] = 6;
+//        tab[0][2] = 7;
+//        tab[1][0] = 4;
+//        tab[1][1] = 0;
+//        tab[1][2] = 5;
+//        tab[2][0] = 2;
+//        tab[2][1] = 1;
+//        tab[2][2] = 3;
     }
 
     public static ArrayList<IEstado> getIniciais() {
@@ -104,8 +104,8 @@ public class PuzzleOito implements IEstado {
     }
         
     @Override
-    public ArrayList<Ramo> suc() {
-        ArrayList<Ramo> s = new ArrayList<Ramo>();
+    public ArrayList<Acao> suc() {
+        ArrayList<Acao> s = new ArrayList<Acao>();
         int[][] novo;
         for (int l=0; l<3; l++)
             for (int c =0; c<3; c++) {
@@ -115,28 +115,28 @@ public class PuzzleOito implements IEstado {
                         novo[l][c] = tab[l-1][c];
                         novo[l-1][c] = 0;
                         PuzzleOito novoEstado = new PuzzleOito(novo);
-                        s.add( new Ramo(novoEstado,1));
+                        s.add( new Acao(novoEstado,1));
                     }
                     if (l<2) {      // baixo
                         novo = copia( tab);
                         novo[l][c] = tab[l+1][c];
                         novo[l+1][c] = 0;
                         PuzzleOito novoEstado = new PuzzleOito(novo);
-                        s.add( new Ramo(novoEstado,1));
+                        s.add( new Acao(novoEstado,1));
                     }
                     if (c>0) {      // esquerda
                         novo = copia( tab);
                         novo[l][c] = tab[l][c-1];
                         novo[l][c-1] = 0;
                         PuzzleOito novoEstado = new PuzzleOito(novo);
-                        s.add( new Ramo(novoEstado,1));
+                        s.add( new Acao(novoEstado,1));
                     }
                     if (c<2) {      // direita
                         novo = copia( tab);
                         novo[l][c] = tab[l][c+1];
                         novo[l][c+1] = 0;
                         PuzzleOito novoEstado = new PuzzleOito(novo);
-                        s.add( new Ramo(novoEstado,1));
+                        s.add( new Acao(novoEstado,1));
                     }
                 }
             }
@@ -201,9 +201,9 @@ public class PuzzleOito implements IEstado {
     public static void testa() {
         PuzzleOito p = new PuzzleOito();
         System.out.println("====================\n" + p);
-        ArrayList<Ramo> suc = p.suc();
+        ArrayList<Acao> suc = p.suc();
         System.out.println("No. Sucessores: "+suc.size());
-        for (Ramo r : suc) {
+        for (Acao r : suc) {
             System.out.println( r.getEstado());
         }
     }

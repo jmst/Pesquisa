@@ -3,7 +3,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 public class ND6 implements IEstado {
 	private int[] p;
@@ -56,21 +56,21 @@ public class ND6 implements IEstado {
 //		return hash;
 //	}
 
-	public ArrayList<Ramo> suc() {
+	public ArrayList<Acao> suc() {
 		int[] np;
-		ArrayList<Ramo> s = new ArrayList<Ramo>();
+		ArrayList<Acao> s = new ArrayList<Acao>();
 		for (int i = 0; i < 6; i++) {
 			np = copia(p);
 			if (np[i] > 0 && np[i + 1] == 0) {
 				np[i + 1] = np[i];
 				np[i] = 0;
-				s.add(new Ramo(new ND6(np), 1));
+				s.add(new Acao(new ND6(np), 1));
 			}
 			np = copia(p);
 			if (np[i] == 0 && np[i + 1] > 0) {
 				np[i] = np[i + 1];
 				np[i + 1] = 0;
-				s.add(new Ramo(new ND6(np), 1));
+				s.add(new Acao(new ND6(np), 1));
 			}
 		}
 		for (int i = 0; i < 5; i++) {
@@ -78,13 +78,13 @@ public class ND6 implements IEstado {
 			if (np[i] > 0 && np[i + 2] == 0) {
 				np[i + 2] = np[i];
 				np[i] = 0;
-				s.add(new Ramo(new ND6(np), 1));
+				s.add(new Acao(new ND6(np), 1));
 			}
 			np = copia(p);
 			if (np[i] == 0 && np[i + 2] > 0) {
 				np[i] = np[i + 2];
 				np[i + 2] = 0;
-				s.add(new Ramo(new ND6(np), 1));
+				s.add(new Acao(new ND6(np), 1));
 			}
 		}
 		return s;

@@ -3,7 +3,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 //
 // dois baldes, de 9 e 4 litros
@@ -22,34 +22,34 @@ public class Baldes49 implements IEstado {
 		return 0; // Math.abs(b9 - 6);
 	}
 
-	public ArrayList<Ramo> suc() {
-		ArrayList<Ramo> s = new ArrayList<Ramo>();
+	public ArrayList<Acao> suc() {
+		ArrayList<Acao> s = new ArrayList<Acao>();
 		if (b9 > 0) {
-			s.add(new Ramo(new Baldes49(0, b4), 1));
+			s.add(new Acao(new Baldes49(0, b4), 1));
 		}
 		if (b4 > 0) {
-			s.add(new Ramo(new Baldes49(b9, 0), 1));
+			s.add(new Acao(new Baldes49(b9, 0), 1));
 		}
 		if (b9 < 9) {
-			s.add(new Ramo(new Baldes49(9, b4), 1));
+			s.add(new Acao(new Baldes49(9, b4), 1));
 		}
 		if (b4 < 4) {
-			s.add(new Ramo(new Baldes49(b9, 4), 1));
+			s.add(new Acao(new Baldes49(b9, 4), 1));
 		}
 		if (b9 < 9 && b4 > 0) {
 			int falta = 9 - b9;
 			if (falta >= b4) {
-				s.add(new Ramo(new Baldes49(b9+b4, 0), 1));
+				s.add(new Acao(new Baldes49(b9+b4, 0), 1));
 			} else {
-				s.add(new Ramo(new Baldes49(9, b4-falta), 1));
+				s.add(new Acao(new Baldes49(9, b4-falta), 1));
 			}
 		}
 		if (b4 < 4 && b9 > 0) {
 			int falta = 4 - b4;
 			if (falta >= b9) {
-				s.add(new Ramo(new Baldes49(0, b4+b9), 1));
+				s.add(new Acao(new Baldes49(0, b4+b9), 1));
 			} else {
-				s.add(new Ramo(new Baldes49(b9-falta, 4), 1));
+				s.add(new Acao(new Baldes49(b9-falta, 4), 1));
 			}
 		}
 		return s;
@@ -98,11 +98,11 @@ public class Baldes49 implements IEstado {
 
 	public static void main(String[] args) {
 		Baldes49 b = new Baldes49(0,0);
-		ArrayList<Ramo> s = b.suc();
+		ArrayList<Acao> s = b.suc();
 		System.out.println("-------------");
 		System.out.println(b);
 		System.out.println("");
-		for (Ramo ss : s) {
+		for (Acao ss : s) {
 			System.out.println(ss.getEstado() + "  " + ss.getEstado().h());
 		}
 	}

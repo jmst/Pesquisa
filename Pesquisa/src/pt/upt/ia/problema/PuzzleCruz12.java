@@ -3,7 +3,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 public class PuzzleCruz12 implements IEstado {
 	private int tab[][];
@@ -130,8 +130,8 @@ public class PuzzleCruz12 implements IEstado {
 	}
 
 	@Override
-	public ArrayList<Ramo> suc() {
-		ArrayList<Ramo> s = new ArrayList<Ramo>();
+	public ArrayList<Acao> suc() {
+		ArrayList<Acao> s = new ArrayList<Acao>();
 		for (int p = 0; p < 7; p++) {
 			if (tab[3][p] == 0) {
 				if (p > 0 && tab[3][p - 1] > 0) {
@@ -140,7 +140,7 @@ public class PuzzleCruz12 implements IEstado {
 					novo[3][p] = novo[3][p - 1];
 					novo[3][p - 1] = 0;
 					PuzzleCruz12 novoEstado = new PuzzleCruz12(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 				if (p < 6 && tab[3][p + 1] > 0) {
 					// da direita
@@ -148,7 +148,7 @@ public class PuzzleCruz12 implements IEstado {
 					novo[3][p] = novo[3][p + 1];
 					novo[3][p + 1] = 0;
 					PuzzleCruz12 novoEstado = new PuzzleCruz12(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 			}
 			if (tab[p][3] == 0) {
@@ -158,7 +158,7 @@ public class PuzzleCruz12 implements IEstado {
 					novo[p][3] = novo[p - 1][3];
 					novo[p - 1][3] = 0;
 					PuzzleCruz12 novoEstado = new PuzzleCruz12(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 				if (p < 6 && tab[p + 1][3] > 0) {
 					// de baixo
@@ -166,7 +166,7 @@ public class PuzzleCruz12 implements IEstado {
 					novo[p][3] = novo[p + 1][3];
 					novo[p + 1][3] = 0;
 					PuzzleCruz12 novoEstado = new PuzzleCruz12(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 			}
 		}
@@ -199,8 +199,8 @@ public class PuzzleCruz12 implements IEstado {
 		PuzzleCruz12 ps = new PuzzleCruz12();
 		System.out.println("" + ps + "  " + ps.h());
 		System.out.println("================");
-		ArrayList<Ramo> s = ps.suc();
-		for (Ramo ss : s) {
+		ArrayList<Acao> s = ps.suc();
+		for (Acao ss : s) {
 			System.out.println(ss.getEstado() + "  " + ss.getEstado().h() + "\n----------------\n");
 		}
 	}

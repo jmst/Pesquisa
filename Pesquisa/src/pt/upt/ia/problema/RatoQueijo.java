@@ -3,7 +3,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 public class RatoQueijo implements IEstado {
 	public static final int DIM = 10;
@@ -104,19 +104,19 @@ public class RatoQueijo implements IEstado {
 	}
 
 	@Override
-	public ArrayList<Ramo> suc() {
-		ArrayList<Ramo> s = new ArrayList<Ramo>();
+	public ArrayList<Acao> suc() {
+		ArrayList<Acao> s = new ArrayList<Acao>();
 		if (ratoL > 0 && tab[ratoL-1][ratoC] == VAZIO) {
-			s.add( new Ramo( new RatoQueijo(ratoL-1, ratoC),1));
+			s.add( new Acao( new RatoQueijo(ratoL-1, ratoC),1));
 		}
 		if (ratoL < DIM-1 && tab[ratoL+1][ratoC] == VAZIO) {
-			s.add( new Ramo( new RatoQueijo(ratoL+1, ratoC),1));
+			s.add( new Acao( new RatoQueijo(ratoL+1, ratoC),1));
 		}
 		if (ratoC > 0 && tab[ratoL][ratoC-1] == VAZIO) {
-			s.add( new Ramo( new RatoQueijo(ratoL, ratoC-1),1));
+			s.add( new Acao( new RatoQueijo(ratoL, ratoC-1),1));
 		}
 		if (ratoC < DIM-1 && tab[ratoL][ratoC+1] == VAZIO) {
-			s.add( new Ramo( new RatoQueijo(ratoL, ratoC+1),1));
+			s.add( new Acao( new RatoQueijo(ratoL, ratoC+1),1));
 		}
 		return s;
 
@@ -153,8 +153,8 @@ public class RatoQueijo implements IEstado {
 
 		System.out.println("" + ps + "  " + ps.h());
 		System.out.println("================");
-		ArrayList<Ramo> s = ps.suc();
-		for (Ramo ss : s) {
+		ArrayList<Acao> s = ps.suc();
+		for (Acao ss : s) {
 			System.out.println(ss.getEstado() + "  " + ss.getEstado().h() + "\n----------------\n");
 		}
 	}

@@ -2,7 +2,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 
 public class MissCan implements IEstado {
@@ -21,62 +21,62 @@ public class MissCan implements IEstado {
         return (ne == 0)?0:(ne>1)?(ne-1):1;
     }
     
-    public ArrayList<Ramo> suc() {
+    public ArrayList<Acao> suc() {
         int nme;
         int nce;
-        ArrayList<Ramo> s = new ArrayList<Ramo>();
+        ArrayList<Acao> s = new ArrayList<Acao>();
         if (barcoE) {
             nme = nMissE - 2;
             nce = nCanE;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, false), 1));
+                s.add( new Acao( new MissCan( nme, nce, false), 1));
             }
             nme = nMissE;
             nce = nCanE - 2;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, false), 1));
+                s.add( new Acao( new MissCan( nme, nce, false), 1));
             }
             nme = nMissE - 1;
             nce = nCanE - 1;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, false), 1));
+                s.add( new Acao( new MissCan( nme, nce, false), 1));
             }
             nme = nMissE - 1;
             nce = nCanE;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, false), 1));
+                s.add( new Acao( new MissCan( nme, nce, false), 1));
             }
             nme = nMissE;
             nce = nCanE - 1;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, false), 1));
+                s.add( new Acao( new MissCan( nme, nce, false), 1));
             }
         }
         else {
             nme = nMissE + 2;
             nce = nCanE;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, true), 1));
+                s.add( new Acao( new MissCan( nme, nce, true), 1));
             }
             nme = nMissE;
             nce = nCanE + 2;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, true), 1));
+                s.add( new Acao( new MissCan( nme, nce, true), 1));
             }
             nme = nMissE + 1;
             nce = nCanE + 1;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, true), 1));
+                s.add( new Acao( new MissCan( nme, nce, true), 1));
             }
             nme = nMissE + 1;
             nce = nCanE;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, true), 1));
+                s.add( new Acao( new MissCan( nme, nce, true), 1));
             }
             nme = nMissE;
             nce = nCanE + 1;
             if (valida( nme, nce)) {
-                s.add( new Ramo( new MissCan( nme, nce, true), 1));
+                s.add( new Acao( new MissCan( nme, nce, true), 1));
             }
         }
         return s;
@@ -151,11 +151,11 @@ public class MissCan implements IEstado {
  
     public static void main( String[] args) {
 	    MissCan mc = new MissCan( 3,1,true);
-	    ArrayList<Ramo> s = mc.suc();
+	    ArrayList<Acao> s = mc.suc();
 	    System.out.println("-------------");
 	    System.out.println(mc);
 	    System.out.println("");
-	    for (Ramo ss : s) {
+	    for (Acao ss : s) {
 	        System.out.println( ss.getEstado() + "  " + ss.getEstado().h());
 	   }
     }

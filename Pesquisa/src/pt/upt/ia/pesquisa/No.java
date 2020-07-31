@@ -61,8 +61,8 @@ public class No {
     
     public ArrayList<No> getSuc() {
         ArrayList<No> suc = new ArrayList<No>();
-        ArrayList<Ramo> s = estado.suc();
-        for (Ramo r : s) {
+        ArrayList<Acao> s = estado.suc();
+        for (Acao r : s) {
             No n = new No( r.getEstado(), this, r.getCusto(), r.getDescr());
             suc.add( n);
         }

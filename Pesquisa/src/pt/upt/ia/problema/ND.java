@@ -3,7 +3,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 
 public class ND implements IEstado {
@@ -36,21 +36,21 @@ public class ND implements IEstado {
 //		return hash;
 //	}
     
-    public ArrayList<Ramo> suc() {
+    public ArrayList<Acao> suc() {
         int[] np;
-        ArrayList<Ramo> s = new ArrayList<Ramo>();
+        ArrayList<Acao> s = new ArrayList<Acao>();
         for (int i=0; i<4; i++) {
             np = copia( p);
             if (np[i] == 1 && np[i+1] == 0) {
                 np[i] = 0;
                 np[i+1] = 1;
-                s.add( new Ramo( new ND( np), 1));
+                s.add( new Acao( new ND( np), 1));
             }
             np = copia( p);
             if (np[i] == 0 && np[i+1] == 2) {
                 np[i] = 2;
                 np[i+1] = 0;
-                s.add( new Ramo( new ND( np), 1));
+                s.add( new Acao( new ND( np), 1));
             }
         }
         for (int i=0; i<3; i++) {
@@ -58,13 +58,13 @@ public class ND implements IEstado {
             if (np[i] == 1 && np[i+1] == 2 && np[i+2] == 0) {
                 np[i] = 0;
                 np[i+2] = 1;
-                s.add( new Ramo( new ND( np), 1));
+                s.add( new Acao( new ND( np), 1));
             }
             np = copia( p);
             if (np[i] == 0 && np[i+1] == 1 && np[i+2] == 2) {
                 np[i] = 2;
                 np[i+2] = 0;
-                s.add( new Ramo( new ND( np), 1));
+                s.add( new Acao( new ND( np), 1));
             }
         }
         return s;
@@ -123,10 +123,10 @@ public class ND implements IEstado {
     public static void main( String[] args) {
         int[] e = {1,0,1,2,2};
         ND est = new ND(e);
-        ArrayList<Ramo> s = est.suc();
+        ArrayList<Acao> s = est.suc();
         System.out.println("Inicial: " + est);
-        ArrayList<Ramo> suc = est.suc();
-        for (Ramo r : suc) {
+        ArrayList<Acao> suc = est.suc();
+        for (Acao r : suc) {
             System.out.println(r.getEstado());
         }
         System.out.println("-------------");

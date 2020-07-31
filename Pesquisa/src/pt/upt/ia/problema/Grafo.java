@@ -2,7 +2,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 
 public class Grafo implements IEstado {
@@ -70,11 +70,11 @@ public class Grafo implements IEstado {
     	return numero == g.getKey();
     }
     
-    public ArrayList<Ramo> suc() {
-    	ArrayList<Ramo> s = new ArrayList<Ramo>();
+    public ArrayList<Acao> suc() {
+    	ArrayList<Acao> s = new ArrayList<Acao>();
     	for (int i=0; i< t.length; i++) {
     		if (t[numero - 1][i] >= 0) {
-    			s.add( new Ramo( new Grafo( i+1), t[numero - 1][i]));
+    			s.add( new Acao( new Grafo( i+1), t[numero - 1][i]));
     		}
     	}
     	return s;
@@ -96,9 +96,9 @@ public class Grafo implements IEstado {
     
     public static void main( String[] args) {
         Grafo estado = new Grafo(4);
-        ArrayList<Ramo> s = estado.suc();
+        ArrayList<Acao> s = estado.suc();
         System.out.println("===============");
-        for (Ramo r : s) {
+        for (Acao r : s) {
             System.out.println("estado "+r.getEstado()+"    custo "+r.getCusto());
         }
     }

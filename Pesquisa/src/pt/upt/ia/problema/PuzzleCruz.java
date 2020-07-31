@@ -3,7 +3,7 @@ package pt.upt.ia.problema;
 import java.util.ArrayList;
 
 import pt.upt.ia.pesquisa.IEstado;
-import pt.upt.ia.pesquisa.Ramo;
+import pt.upt.ia.pesquisa.Acao;
 
 public class PuzzleCruz implements IEstado {
 	private int tab[][];
@@ -109,8 +109,8 @@ public class PuzzleCruz implements IEstado {
 	}
 
 	@Override
-	public ArrayList<Ramo> suc() {
-		ArrayList<Ramo> s = new ArrayList<Ramo>();
+	public ArrayList<Acao> suc() {
+		ArrayList<Acao> s = new ArrayList<Acao>();
 		for (int p = 0; p < 5; p++) {
 			if (tab[2][p] == 0) {
 				if (p > 0 && tab[2][p - 1] > 0) {
@@ -119,7 +119,7 @@ public class PuzzleCruz implements IEstado {
 					novo[2][p] = novo[2][p - 1];
 					novo[2][p - 1] = 0;
 					PuzzleCruz novoEstado = new PuzzleCruz(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 				if (p < 4 && tab[2][p + 1] > 0) {
 					// da direita
@@ -127,7 +127,7 @@ public class PuzzleCruz implements IEstado {
 					novo[2][p] = novo[2][p + 1];
 					novo[2][p + 1] = 0;
 					PuzzleCruz novoEstado = new PuzzleCruz(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 			}
 			if (tab[p][2] == 0) {
@@ -137,7 +137,7 @@ public class PuzzleCruz implements IEstado {
 					novo[p][2] = novo[p - 1][2];
 					novo[p - 1][2] = 0;
 					PuzzleCruz novoEstado = new PuzzleCruz(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 				if (p < 4 && tab[p + 1][2] > 0) {
 					// de baixo
@@ -145,7 +145,7 @@ public class PuzzleCruz implements IEstado {
 					novo[p][2] = novo[p + 1][2];
 					novo[p + 1][2] = 0;
 					PuzzleCruz novoEstado = new PuzzleCruz(novo);
-					s.add(new Ramo(novoEstado, 1));
+					s.add(new Acao(novoEstado, 1));
 				}
 			}
 		}
@@ -179,8 +179,8 @@ public class PuzzleCruz implements IEstado {
 		PuzzleCruz ps = new PuzzleCruz();
 		System.out.println("" + ps + "  " + ps.h());
 		System.out.println("================");
-		ArrayList<Ramo> s = ps.suc();
-		for (Ramo ss : s) {
+		ArrayList<Acao> s = ps.suc();
+		for (Acao ss : s) {
 			System.out.println(ss.getEstado() + "  " + ss.getEstado().h() + "\n----------------\n");
 		}
 	}
