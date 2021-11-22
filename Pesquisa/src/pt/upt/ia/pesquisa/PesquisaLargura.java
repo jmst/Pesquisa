@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import pt.upt.ia.problema.LightsOff;
 import pt.upt.ia.problema.MissCan;
 
 public class PesquisaLargura {
@@ -56,12 +57,11 @@ public class PesquisaLargura {
 			no = f.cabeca();
 			// estatistica
 			contaNos++;
-			// if (contaNos % 1000 == 0) {
-			// System.out.println(no);
-			// System.out.println(" nos expandidos: " + String.format("%1$,10d",
-			// contaNos) + " fronteira: "
-			// + String.format("%1$,5d", f.getContagem()));
-			// }
+			if (contaNos % 1000 == 0) {
+				System.out.println(no);
+				System.out.println(" nos expandidos: " + String.format("%1$,10d", contaNos) + " fronteira: "
+						+ String.format("%1$,5d", f.getContagem()));
+			}
 		}
 		return null;
 	}
@@ -69,8 +69,9 @@ public class PesquisaLargura {
 	public static void main(String[] args) {
 		// PesquisaLargura p = new PesquisaLargura(Baldes49.getIniciais());
 //		 PesquisaLargura p = new PesquisaLargura(Baldes34.getIniciais());
-		 PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
+//		 PesquisaLargura p = new PesquisaLargura(MissCan.getIniciais());
 //		 PesquisaLargura p = new PesquisaLargura(PuzzleOito.getIniciais());
+		PesquisaLargura p = new PesquisaLargura(LightsOff.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(PuzzleSeis.getIniciais());
 		// PesquisaLargura p = new PesquisaLargura(RatoQueijo.getIniciais());
 //		PesquisaLargura p = new PesquisaLargura(ND.getIniciais());

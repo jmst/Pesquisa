@@ -97,7 +97,7 @@ public class Baldes49 implements IEstado {
 	}
 
 	public static void main(String[] args) {
-		Baldes49 b = new Baldes49(0,0);
+		Baldes49 b = new Baldes49(3,3);
 		ArrayList<Acao> s = b.suc();
 		System.out.println("-------------");
 		System.out.println(b);

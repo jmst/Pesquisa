@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 
+import pt.upt.ia.problema.LightsOff;
 import pt.upt.ia.problema.MissCan;
 
 public class PesquisaAprofProgress {
@@ -49,12 +50,11 @@ public class PesquisaAprofProgress {
 
 			// estatistica
 			contaNos++;
-			// if (contaNos % 10000 == 0) {
-			// System.out.println(no);
-			// System.out.println(" nos expandidos: " + String.format("%1$,10d",
-			// contaNos) + " fronteira: "
-			// + String.format("%1$,10d", f.getContagem()));
-			// }
+			if (contaNos % 10000 == 0) {
+				System.out.println(no);
+				System.out.println(" nos expandidos: " + String.format("%1$,10d", contaNos) + " fronteira: "
+						+ String.format("%1$,10d", f.getContagem()));
+			}
 		}
 		return null;
 
@@ -73,7 +73,8 @@ public class PesquisaAprofProgress {
 			// p = new PesquisaAprofProgress(limite, Solitario.getIniciais());
 			// p = new PesquisaAprofProgress(limite, PuzzleOito.getIniciais());
 			// p = new PesquisaAprofProgress(limite, PuzzleSeis.getIniciais());
-			 p = new PesquisaAprofProgress( limite, MissCan.getIniciais());
+//			 p = new PesquisaAprofProgress( limite, MissCan.getIniciais());
+				p = new PesquisaAprofProgress(limite, LightsOff.getIniciais());
 			// p = new PesquisaAprofProgress( limite, ND.getIniciais());
 			// p = new PesquisaAprofProgress( limite, ND6.getIniciais());
 			// p = new PesquisaAprofProgress( limite, Baldes34.getIniciais());

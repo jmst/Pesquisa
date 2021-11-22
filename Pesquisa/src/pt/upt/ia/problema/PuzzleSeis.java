@@ -7,9 +7,9 @@ import pt.upt.ia.pesquisa.Acao;
 
 public class PuzzleSeis implements IEstado {
 	private int hash = Integer.MAX_VALUE;
-	private static final int NPECAS = 9;
+	private static final int NPECAS = 6;
 
-	private int tab[] = { 1, 3, 6, 2, 7, 4, 5, 9, 8 };
+	private int tab[] = { 1, 3, 2, 5, 4, 6};
 
 	public PuzzleSeis(int[] novo) {
 		tab = new int[NPECAS];

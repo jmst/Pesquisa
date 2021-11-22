@@ -1,6 +1,5 @@
 package pt.upt.ia.pesquisa;
 import java.util.ArrayList;
-import java.util.List;
 
 public class No {
     private int profundidade;
